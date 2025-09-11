@@ -10,7 +10,7 @@ export interface LoginModalProps {
 export function LoginModal({ open, onClose, onLogin }: LoginModalProps) {
   return (
     <Dialog open={open} onOpenChange={(v) => { if (!v) onClose() }}>
-      <DialogContent>
+      <DialogContent className="glass-strong bg-transparent">
         <DialogHeader>
           <DialogTitle>Sign in</DialogTitle>
           <DialogDescription>Continue to Weaver</DialogDescription>
