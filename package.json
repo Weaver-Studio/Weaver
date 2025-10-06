@@ -31,6 +31,7 @@
 		"class-variance-authority": "^0.7.1",
 		"clsx": "^2.1.1",
 		"convex": "^1.23.0",
+		"convex-helpers": "^0.1.104",
 		"lucide-react": "^0.542.0",
 		"openai": "^5.16.0",
 		"react": "^0.0.0-experimental-6de32a5a-20250822",
