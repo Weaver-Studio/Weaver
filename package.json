@@ -4,10 +4,7 @@
 	"version": "0.0.0",
 	"type": "module",
 	"scripts": {
-		"dev": "bun run-all --parallel dev:web dev:convex",
-		"dev:web": "vite --open",
-		"dev:convex": "convex dev",
-		"predev": "convex dev --until-success && convex dashboard",
+		"dev": "vite --open",
 		"build": "tsc -b && vite build",
 		"lint": "tsc && eslint .  --ext ts,tsx --report-unused-disable-directives --max-warnings 0",
 		"preview": "vite preview"
