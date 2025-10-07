@@ -9,14 +9,14 @@
     "lint": "tsc -p convex && eslint . --ext ts,tsx --report-unused-disable-directives --max-warnings 0"
   },
   "dependencies": {
-    "convex": "^1.27.4",
     "@workos-inc/node": "^7.70.0",
-    "openai": "^5.23.2"
+    "convex": "^1.27.4",
+    "openai": "^6.2.0"
   },
   "devDependencies": {
     "@typescript-eslint/eslint-plugin": "^6.21.0",
     "@typescript-eslint/parser": "^6.21.0",
-    "@types/node": "^22.18.8",
+    "@types/node": "^24.7.0",
     "eslint": "^8.57.1",
     "typescript": "^5.9.3"
   }

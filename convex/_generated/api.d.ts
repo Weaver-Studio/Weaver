@@ -14,10 +14,8 @@ import type {
   FunctionReference,
 } from "convex/server";
 import type * as http from "../http.js";
-import type * as messages from "../messages.js";
 import type * as node_workos from "../node/workos.js";
 import type * as openRouter_index from "../openRouter/index.js";
-import type * as threads from "../threads.js";
 import type * as users from "../users.js";
 import type * as workosWebHook from "../workosWebHook.js";
 
@@ -31,10 +29,8 @@ import type * as workosWebHook from "../workosWebHook.js";
  */
 declare const fullApi: ApiFromModules<{
   http: typeof http;
-  messages: typeof messages;
   "node/workos": typeof node_workos;
   "openRouter/index": typeof openRouter_index;
-  threads: typeof threads;
   users: typeof users;
   workosWebHook: typeof workosWebHook;
 }>;
