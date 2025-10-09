@@ -21,6 +21,12 @@ export const createAuth = (
 		logger: {
 			disabled: optionsOnly,
 		},
+		advanced: {
+			crossSubDomainCookies: {
+				enabled: true,
+				domain: "example.com"
+			}
+		},
 		trustedOrigins: [siteUrl],
 		database: authComponent.adapter(ctx),
 		// Configure simple, non-verified email/password to get started
