@@ -1,7 +1,7 @@
 import { mutation } from "./_generated/server";
 import { v } from "convex/values";
 
-const addCount = mutation({
+export const addCount = mutation({
 	args: {
 		count: v.number()
 	},
