@@ -13,6 +13,6 @@ export const addCount = mutation({
 export const getCount = query({
 	args: {},
 	handler: async (ctx) => {
-		return ctx.db.query("count").first();
+		return (await ctx.db.query("count").collect()).length;
 	}
 })
