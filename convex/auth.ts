@@ -24,7 +24,7 @@ export const createAuth = (
 		advanced: {
 			crossSubDomainCookies: {
 				enabled: true,
-				domain: "example.com"
+				domain: "test"
 			}
 		},
 		trustedOrigins: [siteUrl],
@@ -33,6 +33,20 @@ export const createAuth = (
 		emailAndPassword: {
 			enabled: true,
 			requireEmailVerification: false,
+		},
+		socialProviders: {
+			// discord: {
+			// 	clientId: process.env.DISCORD_CLIENT_ID as string,
+			// 	clientSecret: process.env.DISCORD_CLIENT_SECRET as string,
+			// },
+			// google: {
+			// 	clientId: process.env.GOOGLE_CLIENT_ID as string,
+			// 	clientSecret: process.env.GOOGLE_CLIENT_SECRET as string,
+			// },
+			github: {
+				clientId: process.env.GITHUB_CLIENT_ID as string,
+				clientSecret: process.env.GITHUB_CLIENT_SECRET as string,
+			},
 		},
 		plugins: [
 			// The cross domain plugin is required for client side frameworks
