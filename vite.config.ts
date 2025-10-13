@@ -1,8 +1,8 @@
 import { defineConfig, loadEnv } from 'vite';
 import react from '@vitejs/plugin-react';
 import tailwindcss from '@tailwindcss/vite';
-import path from 'path';
 import { tanstackRouter } from '@tanstack/router-plugin/vite'
+import path from "path"
 
 // https://vite.dev/config/
 export default defineConfig(({ mode }) => {
@@ -12,10 +12,15 @@ export default defineConfig(({ mode }) => {
 
 	return {
 		server: ({
-			allowedHosts: ['.test'],
-			host: 'app.test',
+			allowedHosts: ['.test.com'],
+			host: 'app.test.com',
 			port: Number(env.VITE_PORT),
 		}),
+    resolve: {
+      alias: {
+        "@": path.resolve(__dirname, "./src"),
+      },
+    },
 		plugins: [
 			tanstackRouter({
 				target: 'react',
@@ -31,10 +36,6 @@ export default defineConfig(({ mode }) => {
 			tailwindcss(),
 
 		],
-		resolve: {
-			alias: {
-				'@': path.resolve(__dirname, './src'),
-			},
-		},
+
 	}
 });

@@ -14,6 +14,7 @@ export default tseslint.config(
       'postcss.config.js',
       'tailwind.config.js',
       'vite.config.ts',
+      'api.ts',
     ],
   },
   {
@@ -62,4 +63,10 @@ export default tseslint.config(
       '@typescript-eslint/require-await': 'off',
     },
   },
+  {
+    files: ["src/components/ui/**"],
+    rules: {
+      "react-refresh/only-export-components": "off"
+    }
+  }
 );
