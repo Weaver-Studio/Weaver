@@ -16,19 +16,29 @@ export const createAuth = (
 	{ optionsOnly } = { optionsOnly: false },
 ) => {
 	return betterAuth({
+		baseURL: process.env.SITE_URL,
+		secret: process.env.BETTER_AUTH_SECRET,
+		database: authComponent.adapter(ctx),
+		verbose: true,
+
+		advanced: {
+			crossSubDomainCookies: {
+				enabled: true,
+				domain: ".test.com"
+			}
+		},
+		trustedOrigins: [
+			process.env.CONVEX_SITE_URL!,
+			siteUrl || 'http://test.com:5170',
+			"http://forum.test.com:5180",
+			"http://app.test.com:5190",
+		],
 		// disable logging when createAuth is called just to generate options.
 		// this is not required, but there's a lot of noise in logs without it.
 		logger: {
 			disabled: optionsOnly,
 		},
-		advanced: {
-			crossSubDomainCookies: {
-				enabled: true,
-				domain: "test"
-			}
-		},
-		trustedOrigins: [siteUrl],
-		database: authComponent.adapter(ctx),
+		// `trustedOrigins: [siteUrl],
 		// Configure simple, non-verified email/password to get started
 		emailAndPassword: {
 			enabled: true,
@@ -49,8 +59,6 @@ export const createAuth = (
 			},
 		},
 		plugins: [
-			// The cross domain plugin is required for client side frameworks
-			crossDomain({ siteUrl }),
 			// The Convex plugin is required for Convex compatibility
 			convex(),
 		],
