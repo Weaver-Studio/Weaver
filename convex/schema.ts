@@ -6,9 +6,47 @@ import { defineSchema, defineTable } from "convex/server";
 import { v } from "convex/values";
 
 export default defineSchema({
-	count: defineTable({
-		count: v.number()
-	})
+	userProfile: defineTable({
+		userId: v.id("users"),
+		theme: v.id("themeData"),
+
+	}),
+
+	//chat related
+	threads: defineTable({
+		userId: v.id("users"),
+		content: v.string(),
+		forkedFromThread: v.optional(v.id("threads")),
+		forkedFromMsg: v.optional(v.id("messages")),
+	}),
+
+	messages: defineTable({
+		threadId: v.id("threads"),
+		title: v.string(),
+		content: v.string(),
+		tokenCount: v.optional(v.number()),
+	}),
+
+	//forum related
+	posts: defineTable({
+		userId: v.id("users"),
+		title: v.string(),
+		content: v.string(),
+
+	}),
+	comments: defineTable({
+		postId: v.id("posts"),
+		parentId: v.id("comments"),
+		content: v.string(),
+		userId: v.id("users"),
+	}),
+
+
+	//theme related
+	themeData: defineTable({
+		userId: v.id("users"),
+		theme: v.string(),
+	}),
 },
 	// If you ever get an error about schema mismatch
 	// between your data and your schema, and you cannot
