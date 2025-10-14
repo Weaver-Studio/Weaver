@@ -1,22 +1,118 @@
-import { createRootRoute, Outlet } from '@tanstack/react-router'
+/// <reference types="vite/client" />
 import { TanStackRouterDevtools } from '@tanstack/react-router-devtools'
 import { AppSidebar } from '@/components/app-sidebar'
 import { Header } from '@/components/dashboard/header'
 import { SidebarProvider, SidebarInset } from '@/components/ui/sidebar'
 
-const RootLayout = () => (
-	<SidebarProvider>
-		<div className="flex h-screen w-full">
-			<AppSidebar />
-			<SidebarInset>
-				<Header />
-				<main className="flex-1 overflow-y-auto p-4 lg:p-6">
-					<Outlet />
-				</main>
-			</SidebarInset>
-		</div>
-		<TanStackRouterDevtools />
-	</SidebarProvider>
-)
 
-export const Route = createRootRoute({ component: RootLayout })
+
+import type { ReactNode } from 'react'
+import {
+	Outlet,
+	createRootRouteWithContext,
+	HeadContent,
+	Scripts,
+	useRouteContext
+} from '@tanstack/react-router'
+
+import { createServerFn } from '@tanstack/react-start'
+import { QueryClient } from '@tanstack/react-query'
+import { ConvexQueryClient } from '@convex-dev/react-query'
+import { ConvexReactClient } from 'convex/react'
+import { getCookie, getRequest } from '@tanstack/react-start/server'
+import { ConvexBetterAuthProvider } from '@convex-dev/better-auth/react'
+import { fetchSession, getCookieName } from '@convex-dev/better-auth/react-start'
+import { authClient } from "@/lib/auth-client";
+
+import appCss from '@/styles/app.css?url'
+
+const fetchAuth = createServerFn({ method: 'GET' }).handler(async () => {
+	const { createAuth } = await import('@convex/auth')
+	const { session } = await fetchSession(getRequest())
+	const sessionCookieName = getCookieName(createAuth)
+	const token = getCookie(sessionCookieName)
+	return {
+		userId: session?.user.id,
+		token,
+	}
+})
+
+export const Route = createRootRouteWithContext<{
+	queryClient: QueryClient
+	convexClient: ConvexReactClient
+	convexQueryClient: ConvexQueryClient
+}>()({
+	head: () => ({
+		meta: [
+			{
+				charSet: 'utf-8',
+			},
+			{
+				name: 'viewport',
+				content: 'width=device-width, initial-scale=1',
+			},
+			{
+				title: 'TanStack Start Starter',
+			},
+		],
+		links: [
+			{
+				rel: 'stylesheet',
+				href: appCss,
+			},
+		],
+	}),
+	beforeLoad: async (ctx) => {
+		// all queries, mutations and action made with TanStack Query will be
+		// authenticated by an identity token.
+		const { userId, token } = await fetchAuth()
+
+		// During SSR only (the only time serverHttpClient exists),
+		// set the auth token to make HTTP queries with.
+		if (token) {
+			ctx.context.convexQueryClient.serverHttpClient?.setAuth(token)
+		}
+
+		return { userId, token }
+	},
+	component: RootComponent,
+})
+
+function RootComponent() {
+	const context = useRouteContext({ from: Route.id })
+	return (
+		<ConvexBetterAuthProvider
+			client={context.convexClient}
+			authClient={authClient}
+		>
+			<RootDocument>
+				<Outlet />
+			</RootDocument>
+		</ConvexBetterAuthProvider>
+	)
+}
+
+function RootDocument({ children }: Readonly<{ children: ReactNode }>) {
+	return (
+		<html lang="en" className="dark">
+			<head>
+				<HeadContent />
+			</head>
+			<body className="bg-neutral-950 text-neutral-50">
+				<SidebarProvider>
+					<div className="flex h-screen w-full">
+						<AppSidebar />
+						<SidebarInset>
+							<Header />
+							<main className="flex-1 overflow-y-auto p-4 lg:p-6">
+								{children}
+							</main>
+						</SidebarInset>
+					</div>
+					<TanStackRouterDevtools />
+				</SidebarProvider>
+				<Scripts />
+			</body>
+		</html>
+	)
+}

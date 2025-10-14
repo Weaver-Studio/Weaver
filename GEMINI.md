@@ -1,10 +1,11 @@
 # Project Overview
 
-This is a full-stack web application built with a modern tech stack. The frontend is built with React and Vite, styled with Tailwind CSS, and uses TanStack Router for routing. The backend is powered by Convex, and authentication is handled by WorkOS AuthKit.
+This is a full-stack web application built with a modern tech stack. The frontend is built with TanStack Start, styled with Tailwind CSS, and uses TanStack Router for routing. The backend is powered by Convex, and authentication is handled by WorkOS AuthKit.
 
 ## Key Technologies
 
 *   **Frontend:**
+    *   [TanStack Start](https://tanstack.com/start): A full-stack framework for React and TypeScript.
     *   [React](https://react.dev/): A JavaScript library for building user interfaces.
     *   [Vite](https://vitejs.dev/): A fast build tool and development server for modern web projects.
     *   [Tailwind CSS](https://tailwindcss.com/): A utility-first CSS framework for rapid UI development.
