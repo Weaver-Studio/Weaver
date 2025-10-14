@@ -15,7 +15,7 @@ export default defineSchema({
 	//chat related
 	threads: defineTable({
 		userId: v.id("users"),
-		content: v.string(),
+		title: v.string(),
 		forkedFromThread: v.optional(v.id("threads")),
 		forkedFromMsg: v.optional(v.id("messages")),
 	}),
