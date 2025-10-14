@@ -13,10 +13,20 @@ export const authComponent = createClient<DataModel>(components.betterAuth);
 
 export const createAuth = (
 	ctx: GenericCtx<DataModel>,
-	{ optionsOnly } = { optionsOnly: false },
+	{ optionsOnly } = { optionsOnly: true },
 ) => {
 	return betterAuth({
+		appName: "Weaver",
 		baseURL: process.env.SITE_URL,
+		trustedOrigins: async (request: Request) => {
+			// Return an array of trusted origins based on the request
+			return [
+				process.env.CONVEX_SITE_URL!,
+				siteUrl || 'http://test.com:5170',
+				// 'http://forum.test.com:5180',
+				// 'http://app.test.com:5190',
+			];
+		},
 		secret: process.env.BETTER_AUTH_SECRET,
 		database: authComponent.adapter(ctx),
 		verbose: true,
@@ -27,18 +37,12 @@ export const createAuth = (
 				domain: ".test.com"
 			}
 		},
-		trustedOrigins: [
-			process.env.CONVEX_SITE_URL!,
-			siteUrl || 'http://test.com:5170',
-			"http://forum.test.com:5180",
-			"http://app.test.com:5190",
-		],
+
 		// disable logging when createAuth is called just to generate options.
 		// this is not required, but there's a lot of noise in logs without it.
 		logger: {
 			disabled: optionsOnly,
 		},
-		// `trustedOrigins: [siteUrl],
 		// Configure simple, non-verified email/password to get started
 		emailAndPassword: {
 			enabled: true,
@@ -58,10 +62,7 @@ export const createAuth = (
 				clientSecret: process.env.GITHUB_CLIENT_SECRET as string,
 			},
 		},
-		plugins: [
-			// The Convex plugin is required for Convex compatibility
-			convex(),
-		],
+		plugins: [convex()],
 	});
 };
 
