@@ -9,7 +9,7 @@ export default defineSchema({
 	userProfile: defineTable({
 		userId: v.id("users"),
 		theme: v.id("themeData"),
-		updateTime: v.int64(),
+		updateAt: v.int64(),
 
 	}),
 
@@ -19,15 +19,15 @@ export default defineSchema({
 		title: v.string(),
 		forkedFromThread: v.optional(v.id("threads")),
 		forkedFromMsg: v.optional(v.id("messages")),
-		updateTime: v.int64(),
+		updateAt: v.int64(),
 	}),
 
 	messages: defineTable({
 		threadId: v.id("threads"),
 		title: v.string(),
 		content: v.string(),
-		tokenCount: v.optional(v.number()),
-		updateTime: v.int64(),
+		sequenceNumber: v.number(),
+		updateAt: v.int64(),
 	}),
 
 	//forum related
@@ -35,14 +35,14 @@ export default defineSchema({
 		userId: v.id("users"),
 		title: v.string(),
 		content: v.string(),
-		updateTime: v.int64(),
+		updateAt: v.int64(),
 	}),
 	comments: defineTable({
 		postId: v.id("posts"),
 		parentId: v.id("comments"),
 		content: v.string(),
 		userId: v.id("users"),
-		updateTime: v.int64(),
+		updateAt: v.int64(),
 	}),
 
 
@@ -50,7 +50,7 @@ export default defineSchema({
 	themeData: defineTable({
 		userId: v.id("users"),
 		theme: v.string(),
-		updateTime: v.int64(),
+		updateAt: v.int64(),
 	}),
 },
 	// If you ever get an error about schema mismatch
