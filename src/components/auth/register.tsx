@@ -1,4 +1,4 @@
-import FormField from "./form-fields"
+import FormFieldChild from "./form-field-child"
 import { Button } from "@/components/ui/button"
 import { Spinner } from "@/components/ui/spinner"
 import Discord from "../svgs/Discord"
@@ -8,18 +8,18 @@ import Google from "../svgs/Google"
 import { signIn, signUp } from "@/lib/auth-client"
 import { useForm, useStore } from "@tanstack/react-form"
 import { z } from "zod"
-import { useRouter } from "@tanstack/react-router"
+import { Link, useRouter } from "@tanstack/react-router"
 import { useState } from "react"
 
 const formSchema = z.object({
 	email: z.email("Please enter a valid email address."),
 	password: z.string()
-		.min(8, "Password must be at least 8 characters long.")
-		.max(16, "Password cannot be more than 16 characters long.")
-		.regex(/[a-z]/, "Password must contain at least one lowercase letter.")
-		.regex(/[A-Z]/, "Password must contain at least one uppercase letter.")
-		.regex(/\d/, "Password must contain at least one digit.")
-		.regex(/[@$!%*?&_]/, "Password must contain at least one special character (@,$,!,%,*,?,&,_)"),
+		.min(8, "Passwords must be at least 8 characters long.")
+		.max(16, "Passwords cannot be more than 16 characters long.")
+		.regex(/[a-z]/, "Passwords must contain at least one lowercase letter.")
+		.regex(/[A-Z]/, "Passwords must contain at least one uppercase letter.")
+		.regex(/\d/, "Passwords must contain at least one digit.")
+		.regex(/[@$!%*?&_]/, "Passwords must contain at least one special character (@,$,!,%,*,?,&,_)"),
 	confirmPassword: z.string()
 })
 	.refine((data) => data.confirmPassword === data.password, {
@@ -88,18 +88,18 @@ function Register() {
 			>
 				<form.Field
 					name="email"
-					children={(field) => <FormField field={field} label="Email" />}
+					children={(field) => <FormFieldChild field={field} label="Email" />}
 				/>
 				<form.Field
 					name="password"
 					children={(field) => (
-						<FormField field={field} label="Password" type="password" />
+						<FormFieldChild field={field} label="Password" type="password" />
 					)}
 				/>
 				<form.Field
 					name="confirmPassword"
 					children={(field) => (
-						<FormField
+						<FormFieldChild
 							field={field}
 							label="Confirm Password"
 							type="password"
@@ -111,15 +111,20 @@ function Register() {
 					<span className="text-red-500 text-sm">{formError}</span>
 				) : null}
 
-				<Button
-					type="submit"
-					className="w-full"
-					disabled={!canSubmit || isSubmitting}
-					onClick={form.handleSubmit}
-				>
-					{isSubmitting ? <Spinner /> : "Register"}
-				</Button>
-			</form>
+				                <Button
+				                    type="submit"
+				                    className="w-full"
+				                    disabled={!canSubmit || isSubmitting}
+				                    onClick={form.handleSubmit}
+				                >
+				                    {isSubmitting ? <Spinner /> : "Register"}
+				                </Button>
+				                <p className="text-sm text-slate-500">
+				                    Already have an account?{" "}
+				                    <Link to="/sign-in" className="text-blue-500 hover:underline">
+				                        Sign In
+				                    </Link>
+				                </p>			</form>
 
 			<div className="flex items-center gap-2 w-full">
 				<div className="h-px flex-grow bg-slate-200" />

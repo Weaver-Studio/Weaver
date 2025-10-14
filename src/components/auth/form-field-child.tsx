@@ -4,7 +4,7 @@ import FieldInfo from "./field-info";
 
 import { AnyFieldApi } from "@tanstack/react-form";
 
-function FormField({
+function FormFieldChild({
 	field,
 	label,
 	type = "text",
@@ -29,4 +29,4 @@ function FormField({
 	);
 }
 
-export default FormField
+export default FormFieldChild
