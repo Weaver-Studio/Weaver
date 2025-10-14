@@ -2,7 +2,6 @@ import { query, mutation } from "./_generated/server";
 import { ConvexError, v } from "convex/values";
 import { authComponent } from "./auth";
 import { paginationOptsValidator } from "convex/server";
-import { Id } from "./betterAuth/_generated/dataModel";
 
 export const testQuery = query({
 	handler: async (ctx) => {
@@ -19,7 +18,7 @@ export const getThreads = query({
 			const identity = await ctx.auth.getUserIdentity();
 
 			const threads = await ctx.db.query("threads")
-				.withIndex("by_userId", (q) => q.eq("userId", identity?.subject as Id<"user">))
+				.withIndex("by_userId", (q) => q.eq("userId", identity?.subject!))
 				.order("desc")
 				.paginate(args.paginationOpts);
 
@@ -36,7 +35,7 @@ export const getThreads = query({
 /*       mutations       */
 /*=======================*/
 
-export const add = mutation({
+export const createThread = mutation({
 	handler: async (ctx) => {
 		try {
 			const identity = await authComponent.getAuthUser(ctx);

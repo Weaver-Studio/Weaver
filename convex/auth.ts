@@ -8,36 +8,32 @@ import authSchema from "./betterAuth/schema";
 
 const siteUrl = process.env.SITE_URL!;
 
-// const authFunctions: AuthFunctions = internal.auth;
-
-
-// export const authComponent = createClient<DataModel>(components.betterAuth, {
-// 	authFunctions,
-// 	triggers: {
-// 		user: {
-// 			onCreate: async (ctx, doc) => {
-// 				await ctx.db.insert("user", {
-// 					authId: doc._id,
-// 					updateAt: BigInt(Date.now()),
-// 				});
-// 			},
-// 			onUpdate: async (ctx, newDoc, oldDoc) => {
-// 				// Both old and new documents are available so you can compare and detect
-// 				// changes - you can ignore oldDoc if you don't need it.
-// 			},
-// 			onDelete: async (ctx, doc) => {
-// 				// The entire deleted document is available
-// 			},
-// 		},
-// 	},
-// });
+const authFunctions: AuthFunctions = internal.auth;
 
 
 export const authComponent = createClient<DataModel, typeof authSchema>(
 	components.betterAuth,
 	{
+		authFunctions,
 		local: {
 			schema: authSchema,
+		},
+		triggers: {
+			user: {
+				onCreate: async (ctx, doc) => {
+					await ctx.db.insert("userState", {
+						userId: doc._id,
+						updateAt: BigInt(Date.now()),
+					});
+				},
+				onUpdate: async (ctx, newDoc, oldDoc) => {
+					// Both old and new documents are available so you can compare and detect
+					// changes - you can ignore oldDoc if you don't need it.
+				},
+				onDelete: async (ctx, doc) => {
+					// The entire deleted document is available
+				},
+			},
 		},
 	}
 );
@@ -104,4 +100,4 @@ export const getCurrentUser = query({
 	},
 });
 
-// export const { onCreate, onUpdate, onDelete } = authComponent.triggersApi();
+export const { onCreate, onUpdate, onDelete } = authComponent.triggersApi();

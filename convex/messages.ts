@@ -11,6 +11,9 @@ export const create = mutation({
 	},
 	handler: async (ctx, args) => {
 		const identity = await authComponent.getAuthUser(ctx);
+		if (!identity) {
+			throw new Error("Not authenticated");
+		}
 
 		const messages = await ctx.db
 			.query("messages")
