@@ -7,7 +7,7 @@ import { v } from "convex/values";
 
 export default defineSchema({
 	userProfile: defineTable({
-		userId: v.id("users"),
+		userId: v.id("user"),
 		theme: v.id("themeData"),
 		updateAt: v.int64(),
 
@@ -15,12 +15,12 @@ export default defineSchema({
 
 	//chat related
 	threads: defineTable({
-		userId: v.id("users"),
+		userId: v.id("user"),
 		title: v.string(),
 		forkedFromThread: v.optional(v.id("threads")),
 		forkedFromMsg: v.optional(v.id("messages")),
 		updateAt: v.int64(),
-	}),
+	}).index("by_userId", ["userId"]),
 
 	messages: defineTable({
 		threadId: v.id("threads"),
@@ -28,27 +28,27 @@ export default defineSchema({
 		content: v.string(),
 		sequenceNumber: v.number(),
 		updateAt: v.int64(),
-	}),
+	}).index("by_threadId", ["threadId"]),
 
 	//forum related
 	posts: defineTable({
-		userId: v.id("users"),
+		userId: v.id("user"),
 		title: v.string(),
 		content: v.string(),
 		updateAt: v.int64(),
 	}),
 	comments: defineTable({
 		postId: v.id("posts"),
-		parentId: v.id("comments"),
+		parentIds: v.array(v.id("comments")),
 		content: v.string(),
-		userId: v.id("users"),
+		userId: v.id("user"),
 		updateAt: v.int64(),
 	}),
 
 
 	//theme related
 	themeData: defineTable({
-		userId: v.id("users"),
+		userId: v.id("user"),
 		theme: v.string(),
 		updateAt: v.int64(),
 	}),

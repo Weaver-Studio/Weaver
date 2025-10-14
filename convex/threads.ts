@@ -1,14 +1,31 @@
 import { query, mutation } from "./_generated/server";
-import { v } from "convex/values";
+import { ConvexError, v } from "convex/values";
 import { authComponent } from "./auth";
+import { paginationOptsValidator } from "convex/server";
 
-export const getAuthUser = query({
+export const testQuery = query({
 	handler: async (ctx) => {
 		const identity = await ctx.auth.getUserIdentity();
-		if (!identity) {
-			throw new Error("Not authenticated");
+		return identity;
+	},
+});
+
+
+export const getThreads = query({
+	args: { paginationOpts: paginationOptsValidator },
+	handler: async (ctx, args) => {
+		try {
+			const identity = await authComponent.getAuthUser(ctx);
+
+			const threads = await ctx.db.query("threads")
+				.withIndex("by_userId", (q) => q.eq("userId", identity._id))
+				.order("desc")
+				.paginate(args.paginationOpts);
+
+			return threads;
+		} catch (error) {
+			throw error;
 		}
-		return await authComponent.getAuthUser(ctx);
 	},
 });
 
@@ -18,21 +35,22 @@ export const getAuthUser = query({
 /*       mutations       */
 /*=======================*/
 
-// export const add = mutation({
-//   handler: async (ctx, args) => {
-//     const identity = await ctx.auth.getUserIdentity();
-//     if (!identity) {
-//       throw new Error("Not authenticated");
-//     }
-//     const userId = authComponent.getAuthUser(ctx);
-//     const threadId = await ctx.db.insert("threads", {
-//       userId,
-//       title: args.title,
-//       updateTime: Date.now(),
-//     });
-//     return threadId;
-//   },
-// });
+export const add = mutation({
+	handler: async (ctx, args) => {
+		try {
+			const identity = await authComponent.getAuthUser(ctx);
+			const threadId = await ctx.db.insert("threads", {
+				userId: identity._id,
+				title: "New Thread",
+				updateAt: BigInt(Date.now()),
+			});
+			return threadId;
+			// todo add the thread title call to give unique thread name
+		} catch (error) {
+			throw error;
+		}
+	},
+});
 
 export const deleteThread = mutation({
 	args: {
