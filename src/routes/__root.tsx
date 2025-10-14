@@ -10,9 +10,6 @@ import {
 
 import { createServerFn } from '@tanstack/react-start'
 import { QueryClient } from '@tanstack/react-query'
-
-import appCss from '@/styles/app.css?url'
-
 import { ConvexQueryClient } from '@convex-dev/react-query'
 import { ConvexReactClient } from 'convex/react'
 import { getCookie, getRequest } from '@tanstack/react-start/server'
@@ -20,6 +17,7 @@ import { ConvexBetterAuthProvider } from '@convex-dev/better-auth/react'
 import { fetchSession, getCookieName } from '@convex-dev/better-auth/react-start'
 import { authClient } from "@/lib/auth-client";
 
+import appCss from '@/styles/app.css?url'
 
 const fetchAuth = createServerFn({ method: 'GET' }).handler(async () => {
 	const { createAuth } = await import('@convex/auth')

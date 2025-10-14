@@ -7,7 +7,7 @@ import path from 'path'
 
 export default defineConfig({
 	server: {
-		host: "test",
+		host: "test.com",
 		port: 5170,
 	},
 	plugins: [
