@@ -37,7 +37,7 @@ export const getThreads = query({
 /*=======================*/
 
 export const add = mutation({
-	handler: async (ctx, args) => {
+	handler: async (ctx) => {
 		try {
 			const identity = await authComponent.getAuthUser(ctx);
 			const threadId = await ctx.db.insert("threads", {
