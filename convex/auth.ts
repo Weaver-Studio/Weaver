@@ -23,8 +23,8 @@ export const createAuth = (
 			return [
 				process.env.CONVEX_SITE_URL!,
 				siteUrl || 'http://test.com:5170',
-				// 'http://forum.test.com:5180',
-				// 'http://app.test.com:5190',
+				'http://forum.test.com:5180',
+				'http://app.test.com:5190',
 			];
 		},
 		secret: process.env.BETTER_AUTH_SECRET,
