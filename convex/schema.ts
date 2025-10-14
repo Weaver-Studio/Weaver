@@ -15,6 +15,7 @@ export default defineSchema({
 		title: v.string(),
 		forkedFromThread: v.optional(v.id("threads")),
 		forkedFromMsg: v.optional(v.id("messages")),
+		sequenceNumber: v.number(),
 		updateAt: v.int64(),
 	})
 		.index("by_userId", ["userId"]),
@@ -38,7 +39,7 @@ export default defineSchema({
 
 	comments: defineTable({
 		postId: v.id("posts"),
-		parentIds: v.array(v.id("comments")),
+		parentId: v.optional(v.id("comments")),
 		content: v.string(),
 		userId: v.string(),
 		updateAt: v.int64(),

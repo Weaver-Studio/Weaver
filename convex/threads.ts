@@ -11,6 +11,10 @@ export const testQuery = query({
 });
 
 
+/*=======================*/
+/*       queries       */
+/*=======================*/
+
 export const getThreads = query({
 	args: { paginationOpts: paginationOptsValidator },
 	handler: async (ctx, args) => {
@@ -38,11 +42,14 @@ export const getThreads = query({
 export const createThread = mutation({
 	handler: async (ctx) => {
 		try {
-			const identity = await authComponent.getAuthUser(ctx);
+			const identity = await ctx.auth.getUserIdentity();
+			if (!identity) throw new Error("Not authenticated");
+
 			const threadId = await ctx.db.insert("threads", {
-				userId: identity._id,
+				userId: identity.subject,
 				title: "New Thread",
 				updateAt: BigInt(Date.now()),
+				sequenceNumber: 0,
 			});
 			return threadId;
 			// todo add the thread title call to give unique thread name
@@ -67,7 +74,7 @@ export const deleteThread = mutation({
 			throw new Error("Thread not found");
 		}
 		if (thread.userId !== userId) {
-			throw new Error("Not authorized");
+			throw new Error("Not authorized to delete thread");
 		}
 		await ctx.db.delete(args.threadId);
 	},
