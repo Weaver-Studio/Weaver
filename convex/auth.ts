@@ -4,33 +4,43 @@ import { components, internal } from "./_generated/api";
 import { DataModel } from "./_generated/dataModel";
 import { query } from "./_generated/server";
 import { betterAuth } from "better-auth";
+import authSchema from "./betterAuth/schema";
 
 const siteUrl = process.env.SITE_URL!;
 
-const authFunctions: AuthFunctions = internal.auth;
+// const authFunctions: AuthFunctions = internal.auth;
 
-// The component client has methods needed for integrating Convex with Better Auth,
-// as well as helper methods for general use.
-export const authComponent = createClient<DataModel>(components.betterAuth, {
-	authFunctions,
-	triggers: {
-		user: {
-			onCreate: async (ctx, doc) => {
-				await ctx.db.insert("user", {
-					authId: doc._id,
-					updateAt: BigInt(Date.now()),
-				});
-			},
-			onUpdate: async (ctx, newDoc, oldDoc) => {
-				// Both old and new documents are available so you can compare and detect
-				// changes - you can ignore oldDoc if you don't need it.
-			},
-			onDelete: async (ctx, doc) => {
-				// The entire deleted document is available
-			},
+
+// export const authComponent = createClient<DataModel>(components.betterAuth, {
+// 	authFunctions,
+// 	triggers: {
+// 		user: {
+// 			onCreate: async (ctx, doc) => {
+// 				await ctx.db.insert("user", {
+// 					authId: doc._id,
+// 					updateAt: BigInt(Date.now()),
+// 				});
+// 			},
+// 			onUpdate: async (ctx, newDoc, oldDoc) => {
+// 				// Both old and new documents are available so you can compare and detect
+// 				// changes - you can ignore oldDoc if you don't need it.
+// 			},
+// 			onDelete: async (ctx, doc) => {
+// 				// The entire deleted document is available
+// 			},
+// 		},
+// 	},
+// });
+
+
+export const authComponent = createClient<DataModel, typeof authSchema>(
+	components.betterAuth,
+	{
+		local: {
+			schema: authSchema,
 		},
-	},
-});
+	}
+);
 
 export const createAuth = (
 	ctx: GenericCtx<DataModel>,
@@ -94,4 +104,4 @@ export const getCurrentUser = query({
 	},
 });
 
-export const { onCreate, onUpdate, onDelete } = authComponent.triggersApi();
+// export const { onCreate, onUpdate, onDelete } = authComponent.triggersApi();

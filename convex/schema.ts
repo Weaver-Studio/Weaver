@@ -1,17 +1,13 @@
-// NOTE: You can remove this file. Declaring the shape
-// of the database is entirely optional in Convex.
-// See https://docs.convex.dev/database/schemas.
-
 import { defineSchema, defineTable } from "convex/server";
 import { v } from "convex/values";
+import { tables } from "./betterAuth/schema";
 
 export default defineSchema({
-	user: defineTable({
-		authId: v.string(),
+	userState: defineTable({
+		userId: v.id("user"),
 		theme: v.optional(v.id("themeData")),
 		updateAt: v.int64(),
-
-	}).index("by_authId", ["authId"]),
+	}).index("by_userId", ["userId"]),
 
 	//chat related
 	threads: defineTable({
@@ -52,13 +48,5 @@ export default defineSchema({
 		updateAt: v.int64(),
 	}),
 },
-	// If you ever get an error about schema mismatch
-	// between your data and your schema, and you cannot
-	// change the schema to match the current data in your database,
-	// you can:
-	//  1. Use the dashboard to delete tables or individual documents
-	//     that are causing the error.
-	//  2. Change this option to `false` and make changes to the data
-	//     freely, ignoring the schema. Don't forget to change back to `true`!
 	{ schemaValidation: true }
 );

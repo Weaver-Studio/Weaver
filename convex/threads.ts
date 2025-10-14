@@ -2,7 +2,7 @@ import { query, mutation } from "./_generated/server";
 import { ConvexError, v } from "convex/values";
 import { authComponent } from "./auth";
 import { paginationOptsValidator } from "convex/server";
-import { Id } from "./_generated/dataModel";
+import { Id } from "./betterAuth/_generated/dataModel";
 
 export const testQuery = query({
 	handler: async (ctx) => {
