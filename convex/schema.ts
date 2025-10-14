@@ -6,12 +6,12 @@ import { defineSchema, defineTable } from "convex/server";
 import { v } from "convex/values";
 
 export default defineSchema({
-	userProfile: defineTable({
-		userId: v.id("user"),
-		theme: v.id("themeData"),
+	user: defineTable({
+		authId: v.string(),
+		theme: v.optional(v.id("themeData")),
 		updateAt: v.int64(),
 
-	}),
+	}).index("by_authId", ["authId"]),
 
 	//chat related
 	threads: defineTable({
@@ -24,7 +24,6 @@ export default defineSchema({
 
 	messages: defineTable({
 		threadId: v.id("threads"),
-		title: v.string(),
 		content: v.string(),
 		sequenceNumber: v.number(),
 		updateAt: v.int64(),

@@ -1,15 +1,36 @@
-import { createClient, type GenericCtx } from "@convex-dev/better-auth";
-import { convex, crossDomain } from "@convex-dev/better-auth/plugins";
-import { components } from "./_generated/api";
+import { createClient, type GenericCtx, AuthFunctions } from "@convex-dev/better-auth";
+import { convex } from "@convex-dev/better-auth/plugins";
+import { components, internal } from "./_generated/api";
 import { DataModel } from "./_generated/dataModel";
 import { query } from "./_generated/server";
 import { betterAuth } from "better-auth";
 
 const siteUrl = process.env.SITE_URL!;
 
+const authFunctions: AuthFunctions = internal.auth;
+
 // The component client has methods needed for integrating Convex with Better Auth,
 // as well as helper methods for general use.
-export const authComponent = createClient<DataModel>(components.betterAuth);
+export const authComponent = createClient<DataModel>(components.betterAuth, {
+	authFunctions,
+	triggers: {
+		user: {
+			onCreate: async (ctx, doc) => {
+				await ctx.db.insert("user", {
+					authId: doc._id,
+					updateAt: BigInt(Date.now()),
+				});
+			},
+			onUpdate: async (ctx, newDoc, oldDoc) => {
+				// Both old and new documents are available so you can compare and detect
+				// changes - you can ignore oldDoc if you don't need it.
+			},
+			onDelete: async (ctx, doc) => {
+				// The entire deleted document is available
+			},
+		},
+	},
+});
 
 export const createAuth = (
 	ctx: GenericCtx<DataModel>,
@@ -18,6 +39,8 @@ export const createAuth = (
 	return betterAuth({
 		appName: "Weaver",
 		baseURL: process.env.SITE_URL,
+
+
 		trustedOrigins: async (request: Request) => {
 			// Return an array of trusted origins based on the request
 			return [
@@ -37,13 +60,9 @@ export const createAuth = (
 				domain: ".test.com"
 			}
 		},
-
-		// disable logging when createAuth is called just to generate options.
-		// this is not required, but there's a lot of noise in logs without it.
 		logger: {
 			disabled: optionsOnly,
 		},
-		// Configure simple, non-verified email/password to get started
 		emailAndPassword: {
 			enabled: true,
 			requireEmailVerification: false,
@@ -74,3 +93,5 @@ export const getCurrentUser = query({
 		return authComponent.getAuthUser(ctx);
 	},
 });
+
+export const { onCreate, onUpdate, onDelete } = authComponent.triggersApi();

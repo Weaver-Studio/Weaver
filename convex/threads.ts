@@ -2,6 +2,7 @@ import { query, mutation } from "./_generated/server";
 import { ConvexError, v } from "convex/values";
 import { authComponent } from "./auth";
 import { paginationOptsValidator } from "convex/server";
+import { Id } from "./_generated/dataModel";
 
 export const testQuery = query({
 	handler: async (ctx) => {
@@ -15,10 +16,10 @@ export const getThreads = query({
 	args: { paginationOpts: paginationOptsValidator },
 	handler: async (ctx, args) => {
 		try {
-			const identity = await authComponent.getAuthUser(ctx);
+			const identity = await ctx.auth.getUserIdentity();
 
 			const threads = await ctx.db.query("threads")
-				.withIndex("by_userId", (q) => q.eq("userId", identity._id))
+				.withIndex("by_userId", (q) => q.eq("userId", identity?.subject as Id<"user">))
 				.order("desc")
 				.paginate(args.paginationOpts);
 
