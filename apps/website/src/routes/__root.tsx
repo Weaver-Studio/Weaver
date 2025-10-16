@@ -20,7 +20,7 @@ import { authClient } from "@/lib/auth-client";
 import appCss from '@/styles/app.css?url'
 
 const fetchAuth = createServerFn({ method: 'GET' }).handler(async () => {
-	const { createAuth } = await import('@weaver/backend')
+	const { createAuth } = await import('../../../../packages/backend')
 	const { session } = await fetchSession(getRequest())
 	const sessionCookieName = getCookieName(createAuth)
 	const token = getCookie(sessionCookieName)
