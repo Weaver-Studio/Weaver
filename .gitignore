@@ -40,3 +40,5 @@ yarn-error.log*
 #apps
 /apps/docs
 /apps/web
+
+.tanstack

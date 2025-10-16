@@ -16,10 +16,8 @@ export default defineConfig(() => {
 		resolve: {
 			alias: {
 				'@': path.resolve(__dirname, './src'),
-				'@convex': path.resolve(__dirname, './convex/convex'),
 			},
 		},
-		envDir: path.resolve(__dirname, '../../'),
 		plugins: [
 			tsConfigPaths(),
 			tanstackStart(),
