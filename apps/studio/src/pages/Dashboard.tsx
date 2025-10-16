@@ -1,5 +1,5 @@
-import { Stats } from "@/components/dashboard/stats";
-import { ProjectsTable } from "@/components/dashboard/projects-table";
+import { Stats } from "@studio/components/dashboard/stats";
+import { ProjectsTable } from "@studio/components/dashboard/projects-table";
 
 export default function Dashboard() {
   return (

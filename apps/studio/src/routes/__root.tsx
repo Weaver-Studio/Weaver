@@ -1,8 +1,8 @@
 /// <reference types="vite/client" />
 import { TanStackRouterDevtools } from '@tanstack/react-router-devtools'
-import { AppSidebar } from '@/components/app-sidebar'
-import { Header } from '@/components/dashboard/header'
-import { SidebarProvider, SidebarInset } from '@/components/ui/sidebar'
+import { AppSidebar } from '@studio/components/app-sidebar'
+import { Header } from '@studio/components/dashboard/header'
+import { SidebarProvider, SidebarInset } from '@studio/components/ui/sidebar'
 
 
 
@@ -22,12 +22,12 @@ import { ConvexReactClient } from 'convex/react'
 import { getCookie, getRequest } from '@tanstack/react-start/server'
 import { ConvexBetterAuthProvider } from '@convex-dev/better-auth/react'
 import { fetchSession, getCookieName } from '@convex-dev/better-auth/react-start'
-import { authClient } from "@/lib/auth-client";
+import { authClient } from "@studio/lib/auth-client";
 
 import appCss from '@/styles/app.css?url'
 
 const fetchAuth = createServerFn({ method: 'GET' }).handler(async () => {
-	const { createAuth } = await import('@convex/auth')
+	const { createAuth } = await import('@weaver/backend')
 	const { session } = await fetchSession(getRequest())
 	const sessionCookieName = getCookieName(createAuth)
 	const token = getCookie(sessionCookieName)

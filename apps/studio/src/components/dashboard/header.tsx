@@ -1,6 +1,6 @@
 import { Link } from "@tanstack/react-router";
 import { CircleUser, Menu, Package2, Search, Home, ShoppingCart, Package, Users, LineChart } from "lucide-react";
-import { Button } from "@/components/ui/button";
+import { Button } from "@studio/components/ui/button";
 import {
     DropdownMenu,
     DropdownMenuContent,
@@ -8,12 +8,12 @@ import {
     DropdownMenuLabel,
     DropdownMenuSeparator,
     DropdownMenuTrigger,
-} from "@/components/ui/dropdown-menu";
-import { Input } from "@/components/ui/input";
-import { Sheet, SheetContent, SheetTrigger } from "@/components/ui/sheet";
+} from "@studio/components/ui/dropdown-menu";
+import { Input } from "@studio/components/ui/input";
+import { Sheet, SheetContent, SheetTrigger } from "@studio/components/ui/sheet";
 import { Authenticated, Unauthenticated, useQuery } from "convex/react";
-import { useSession } from "@/lib/auth-client";
-import { api } from "@convex/_generated/api";
+import { useSession } from "@studio/lib/auth-client";
+import { api } from "@weaver/backend";
 
 export function Header() {
     const { data } = useSession()

@@ -1,9 +1,15 @@
-{
-  "extends": "../../tsconfig.json",
+{ 
   "compilerOptions": {
+		"jsx": "react-jsx",
+		"moduleResolution": "Bundler",
+		"module": "ESNext",
+		"target": "ESNext",
+		"skipLibCheck": true,
+		"strictNullChecks": true,
+		"strict": true,
     "baseUrl": ".",
     "paths": {
-      "@/*": ["./src/*"],
+      "@website/*": ["./src/*"],
     }
   }
 }
