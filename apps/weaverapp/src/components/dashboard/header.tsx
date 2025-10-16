@@ -11,11 +11,24 @@ import {
 } from "@/components/ui/dropdown-menu";
 import { Input } from "@/components/ui/input";
 import { Sheet, SheetContent, SheetTrigger } from "@/components/ui/sheet";
+import { Authenticated, Unauthenticated, useQuery } from "convex/react";
+import { useSession } from "@/lib/auth-client";
+import { api } from "@convex/_generated/api";
 
 export function Header() {
+    const { data } = useSession()
+    const threads = useQuery(api.threads.testQuery)
+    console.log(threads?.subject)
     return (
         <header className="flex h-14 items-center gap-4 border-b bg-muted/40 px-4 lg:h-[60px] lg:px-6">
             <Sheet>
+                <Authenticated>
+                    logged in {data?.user?.email}
+
+                </Authenticated>
+                <Unauthenticated>
+                    not logged in
+                </Unauthenticated>
                 <SheetTrigger asChild>
                     <Button
                         variant="outline"
