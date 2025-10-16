@@ -14,7 +14,13 @@ export default defineConfig({
 		tsConfigPaths(),
 		tanstackStart(),
 		// react's vite plugin must come after start's vite plugin
-		viteReact(),
+		viteReact({
+			babel: {
+				plugins: [
+					['babel-plugin-react-compiler', { /* optional configuration, e.g., target: '18' for React 18 */ }],
+				],
+			},
+		}),
 	],
 	resolve: {
 		alias: {
