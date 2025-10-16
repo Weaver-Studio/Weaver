@@ -1,8 +1,8 @@
 import { useState, useRef, useEffect, useCallback } from "react";
-import { Card } from "@/components/ui/card";
-import { Skeleton } from "@/components/ui/skeleton";
+import { Card } from "@studio/components/ui/card";
+import { Skeleton } from "@studio/components/ui/skeleton";
 import { PlayCircle } from "lucide-react";
-import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
+import { Tabs, TabsContent, TabsList, TabsTrigger } from "@studio/components/ui/tabs";
 
 const generateContent = (count = 12) => {
 	return Array.from({ length: count }).map((_, index) => {

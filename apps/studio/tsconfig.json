@@ -1,9 +1,16 @@
 {
-  "extends": "../../tsconfig.json",
   "compilerOptions": {
-    "baseUrl": ".",
-    "paths": {
-      "@/*": ["./src/*"]
-    }
-  }
+		"jsx": "react-jsx",
+		"moduleResolution": "Bundler",
+		"module": "ESNext",
+		"target": "ESNext",
+		"skipLibCheck": true,
+		"strictNullChecks": true,
+		"strict": true,
+		"baseUrl": ".",
+		"paths": {
+			"@studio/*": ["./src/*"],
+			"@/*": ["./src/*"]
+		}
+  	}
 }

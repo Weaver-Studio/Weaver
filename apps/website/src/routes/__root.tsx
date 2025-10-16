@@ -15,12 +15,12 @@ import { ConvexReactClient } from 'convex/react'
 import { getCookie, getRequest } from '@tanstack/react-start/server'
 import { ConvexBetterAuthProvider } from '@convex-dev/better-auth/react'
 import { fetchSession, getCookieName } from '@convex-dev/better-auth/react-start'
-import { authClient } from "@/lib/auth-client";
+import { authClient } from "@website/lib/auth-client";
 
 import appCss from '@/styles/app.css?url'
 
 const fetchAuth = createServerFn({ method: 'GET' }).handler(async () => {
-	const { createAuth } = await import('../../../../packages/backend')
+	const { createAuth } = await import('@weaver/backend')
 	const { session } = await fetchSession(getRequest())
 	const sessionCookieName = getCookieName(createAuth)
 	const token = getCookie(sessionCookieName)

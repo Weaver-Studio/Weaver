@@ -1,5 +1,5 @@
 import { useRouterState } from "@tanstack/react-router"
-import { NavChatThreads } from "@/components/nav-chat-threads"
+import { NavChatThreads } from "@studio/components/nav-chat-threads"
 import * as React from "react"
 import {
 	AudioWaveform,
@@ -12,20 +12,20 @@ import {
 	PieChart,
 	Settings2,
 	SquareTerminal,
-  MessageSquare,
+	MessageSquare,
 } from "lucide-react"
 
-import { NavMain } from "@/components/nav-main"
-import { NavProjects } from "@/components/nav-projects"
-import { NavUser } from "@/components/nav-user"
-import { TeamSwitcher } from "@/components/team-switcher"
+import { NavMain } from "@studio/components/nav-main"
+import { NavProjects } from "@studio/components/nav-projects"
+import { NavUser } from "@studio/components/nav-user"
+import { TeamSwitcher } from "@studio/components/team-switcher"
 import {
 	Sidebar,
 	SidebarContent,
 	SidebarFooter,
 	SidebarHeader,
 	SidebarRail,
-} from "@/components/ui/sidebar"
+} from "@studio/components/ui/sidebar"
 
 // This is sample data.
 const data = {
@@ -118,52 +118,52 @@ const data = {
 			title: "Settings",
 			url: "#",
 			icon: Settings2,
-			      items: [
-			        {
-			          title: "General",
-			          url: "#",
-			        },
-			        {
-			          title: "Team",
-			          url: "#",
-			        },
-			        {
-			          title: "Billing",
-			          url: "#",
-			        },
-			        {
-			          title: "Limits",
-			          url: "#",
-			        },
-			      ],
-			    },
-			    {
-			      title: "Chat",
-			      url: "/chat",
-			      icon: MessageSquare,
-			    },
-			  ],
-			  projects: [		{
-			name: "Design Engineering",
-			url: "#",
-			icon: Frame,
+			items: [
+				{
+					title: "General",
+					url: "#",
+				},
+				{
+					title: "Team",
+					url: "#",
+				},
+				{
+					title: "Billing",
+					url: "#",
+				},
+				{
+					title: "Limits",
+					url: "#",
+				},
+			],
 		},
 		{
-			name: "Sales & Marketing",
-			url: "#",
-			icon: PieChart,
+			title: "Chat",
+			url: "/chat",
+			icon: MessageSquare,
 		},
-		{
-			name: "Travel",
-			url: "#",
-			icon: Map,
-		},
+	],
+	projects: [{
+		name: "Design Engineering",
+		url: "#",
+		icon: Frame,
+	},
+	{
+		name: "Sales & Marketing",
+		url: "#",
+		icon: PieChart,
+	},
+	{
+		name: "Travel",
+		url: "#",
+		icon: Map,
+	},
 	],
 }
 
 export function AppSidebar({ ...props }: React.ComponentProps<typeof Sidebar>) {
-  const routerState = useRouterState()
-  const isChatPage = routerState.location.pathname === '/chat'
+	const routerState = useRouterState()
+	const isChatPage = routerState.location.pathname === '/chat'
 
 	return (
 		<Sidebar collapsible="icon" {...props}>
@@ -171,8 +171,8 @@ export function AppSidebar({ ...props }: React.ComponentProps<typeof Sidebar>) {
 				<TeamSwitcher teams={data.teams} />
 			</SidebarHeader>
 			<SidebarContent>
-        {isChatPage ? <NavChatThreads /> : <NavMain items={data.navMain} />}
-        {!isChatPage && <NavProjects projects={data.projects} />}
+				{isChatPage ? <NavChatThreads /> : <NavMain items={data.navMain} />}
+				{!isChatPage && <NavProjects projects={data.projects} />}
 			</SidebarContent>
 			<SidebarFooter>
 				<NavUser user={data.user} />

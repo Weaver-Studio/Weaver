@@ -1,4 +1,4 @@
-import { createAuth } from './convex/auth'
-import { api } from './convex/_generated/api'
+import { api } from "./convex/_generated/api"
+import { createAuth } from "./convex/auth"
 
-export { createAuth, api }
+export { api, createAuth }

@@ -1,6 +1,6 @@
-import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
-import { Button } from "@/components/ui/button";
-import { Input } from "@/components/ui/input";
+import { Avatar, AvatarFallback, AvatarImage } from "@studio/components/ui/avatar";
+import { Button } from "@studio/components/ui/button";
+import { Input } from "@studio/components/ui/input";
 import { Paperclip, Send } from "lucide-react";
 
 export default function ChatPage() {
