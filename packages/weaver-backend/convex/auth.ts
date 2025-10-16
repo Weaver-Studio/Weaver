@@ -44,14 +44,14 @@ export const createAuth = (
 ) => {
 	return betterAuth({
 		appName: "Weaver",
-		baseURL: process.env.SITE_URL,
+		baseURL: "http://test.com:5170",
 
 
 		trustedOrigins: async (request: Request) => {
 			// Return an array of trusted origins based on the request
 			return [
 				process.env.CONVEX_SITE_URL!,
-				siteUrl || 'http://test.com:5170',
+				'http://test.com:5170',
 				'http://forum.test.com:5180',
 				'http://app.test.com:5190',
 			];

@@ -1,17 +1,9 @@
 {
+  "extends": "../../tsconfig.json",
   "compilerOptions": {
-    "jsx": "react-jsx",
-    "moduleResolution": "Bundler",
-    "module": "ESNext",
-    "target": "ES2022",
-    "skipLibCheck": true,
-    "strictNullChecks": true,
-    "strict": true,
-
     "baseUrl": ".",
     "paths": {
-      "@/*": ["./src/*"],
-      "@convex/*": ["./convex/convex/*"]
+      "@/*": ["./src/*"]
     }
   }
 }

@@ -78,13 +78,13 @@ export interface FileRouteTypes {
   fileRoutesByTo: FileRoutesByTo
   to: '/' | '/auth' | '/test' | '/register' | '/sign-in' | '/api/auth/$'
   id:
-  | '__root__'
-  | '/'
-  | '/auth'
-  | '/test'
-  | '/_auth/register'
-  | '/_auth/sign-in'
-  | '/api/auth/$'
+    | '__root__'
+    | '/'
+    | '/auth'
+    | '/test'
+    | '/_auth/register'
+    | '/_auth/sign-in'
+    | '/api/auth/$'
   fileRoutesById: FileRoutesById
 }
 export interface RootRouteChildren {
@@ -155,7 +155,7 @@ export const routeTree = rootRouteImport
   ._addFileChildren(rootRouteChildren)
   ._addFileTypes<FileRouteTypes>()
 
-import type { getRouter } from './router'
+import type { getRouter } from './router.tsx'
 import type { createStart } from '@tanstack/react-start'
 declare module '@tanstack/react-start' {
   interface Register {
