@@ -15,6 +15,7 @@ import type * as betterAuth_adapter from "../betterAuth/adapter.js";
 import type * as betterAuth_auth from "../betterAuth/auth.js";
 import type * as http from "../http.js";
 import type * as messages from "../messages.js";
+import type * as posts from "../posts.js";
 import type * as threads from "../threads.js";
 
 import type {
@@ -39,6 +40,7 @@ declare const fullApi: ApiFromModules<{
   "betterAuth/auth": typeof betterAuth_auth;
   http: typeof http;
   messages: typeof messages;
+  posts: typeof posts;
   threads: typeof threads;
 }>;
 declare const fullApiWithMounts: typeof fullApi;
