@@ -20,6 +20,7 @@
     "@tanstack/react-router-with-query": "^1.130.17",
     "@tanstack/react-start": "^1.133.3",
     "@unpic/react": "^1.0.1",
+    "@weaver/ui": "workspace:*",
     "@weaver/backend": "workspace:*",
     "better-auth": "1.3.27",
     "class-variance-authority": "^0.7.1",
@@ -35,7 +36,6 @@
     "zod": "^4.1.12"
   },
   "devDependencies": {
-    "@types/bun": "^1.3.0",
     "@types/node": "^24.8.0",
     "@types/react": "^19.2.2",
     "@types/react-dom": "^19.2.2",

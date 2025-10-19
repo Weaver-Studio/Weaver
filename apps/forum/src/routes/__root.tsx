@@ -15,7 +15,7 @@ import { ConvexReactClient } from 'convex/react'
 import { getCookie, getRequest } from '@tanstack/react-start/server'
 import { ConvexBetterAuthProvider } from '@convex-dev/better-auth/react'
 import { fetchSession, getCookieName } from '@convex-dev/better-auth/react-start'
-import { authClient } from "@website/lib/auth-client";
+import { authClient } from "@forum/lib/auth-client";
 
 import appCss from '@/styles/app.css?url'
 
