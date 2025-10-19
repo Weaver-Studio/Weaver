@@ -39,3 +39,21 @@ export const getPosts = query({
     );
   },
 });
+
+export const getPost = query({
+  args: { postId: v.id("posts") },
+  handler: async (ctx, args) => {
+    const post = await ctx.db.get(args.postId);
+    if (!post) {
+      return null;
+    }
+    const user = await ctx.db
+      .query("users")
+      .filter((q) => q.eq(q.field("subject"), post.userId))
+      .first();
+    return {
+      ...post,
+      author: user,
+    };
+  },
+});
