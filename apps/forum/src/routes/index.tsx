@@ -1,7 +1,8 @@
-import { createFileRoute } from '@tanstack/react-router'
+import { createFileRoute, Link } from '@tanstack/react-router'
 import { Authenticated, Unauthenticated } from "convex/react";
 import { Button } from "@weaver/ui/components/ui/button";
 import { useSession } from '@forum/lib/auth-client';
+import { SignInButton, SignOutButton } from '@forum/components/ui/buttons';
 
 export const Route = createFileRoute('/')({
 	component: Index,
@@ -11,18 +12,24 @@ function Index() {
 
 	const { data } = useSession()
 	return (
-		<div className="container flex h-dvh flex-col items-center justify-center">
-			{/* <Unauthenticated>
-				<div className="flex flex-row items-center gap-2">
-					Please sign in to continue
-					<SignInButton />
+		<div className="container mx-auto p-4">
+			<header className="flex justify-between items-center mb-4">
+				<h1 className="text-2xl font-bold">Roblox Dev Forum</h1>
+				<div className="flex items-center gap-4">
+					<Link to="/new-post">
+						<Button>New Post</Button>
+					</Link>
+					<Authenticated>
+						<SignOutButton />
+					</Authenticated>
+					<Unauthenticated>
+						<SignInButton />
+					</Unauthenticated>
 				</div>
-			</Unauthenticated>
-			<Authenticated>
-				<p>Welcome! {data?.user.email}</p>
-				<SignOutButton />
-			</Authenticated> */}
-			<Button variant="outline">Button</Button>
+			</header>
+			<main>
+				{/* Posts will be listed here */}
+			</main>
 		</div>
 	);
 }

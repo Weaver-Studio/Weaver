@@ -9,11 +9,17 @@
 // Additionally, you should also exclude this file from your linter and/or formatter to prevent it from being checked or modified.
 
 import { Route as rootRouteImport } from './routes/__root'
+import { Route as NewPostRouteImport } from './routes/new-post'
 import { Route as IndexRouteImport } from './routes/index'
 import { Route as AuthSignInRouteImport } from './routes/_auth/sign-in'
 import { Route as AuthRegisterRouteImport } from './routes/_auth/register'
 import { Route as ApiAuthSplatRouteImport } from './routes/api/auth/$'
 
+const NewPostRoute = NewPostRouteImport.update({
+  id: '/new-post',
+  path: '/new-post',
+  getParentRoute: () => rootRouteImport,
+} as any)
 const IndexRoute = IndexRouteImport.update({
   id: '/',
   path: '/',
@@ -37,12 +43,14 @@ const ApiAuthSplatRoute = ApiAuthSplatRouteImport.update({
 
 export interface FileRoutesByFullPath {
   '/': typeof IndexRoute
+  '/new-post': typeof NewPostRoute
   '/register': typeof AuthRegisterRoute
   '/sign-in': typeof AuthSignInRoute
   '/api/auth/$': typeof ApiAuthSplatRoute
 }
 export interface FileRoutesByTo {
   '/': typeof IndexRoute
+  '/new-post': typeof NewPostRoute
   '/register': typeof AuthRegisterRoute
   '/sign-in': typeof AuthSignInRoute
   '/api/auth/$': typeof ApiAuthSplatRoute
@@ -50,20 +58,28 @@ export interface FileRoutesByTo {
 export interface FileRoutesById {
   __root__: typeof rootRouteImport
   '/': typeof IndexRoute
+  '/new-post': typeof NewPostRoute
   '/_auth/register': typeof AuthRegisterRoute
   '/_auth/sign-in': typeof AuthSignInRoute
   '/api/auth/$': typeof ApiAuthSplatRoute
 }
 export interface FileRouteTypes {
   fileRoutesByFullPath: FileRoutesByFullPath
-  fullPaths: '/' | '/register' | '/sign-in' | '/api/auth/$'
+  fullPaths: '/' | '/new-post' | '/register' | '/sign-in' | '/api/auth/$'
   fileRoutesByTo: FileRoutesByTo
-  to: '/' | '/register' | '/sign-in' | '/api/auth/$'
-  id: '__root__' | '/' | '/_auth/register' | '/_auth/sign-in' | '/api/auth/$'
+  to: '/' | '/new-post' | '/register' | '/sign-in' | '/api/auth/$'
+  id:
+    | '__root__'
+    | '/'
+    | '/new-post'
+    | '/_auth/register'
+    | '/_auth/sign-in'
+    | '/api/auth/$'
   fileRoutesById: FileRoutesById
 }
 export interface RootRouteChildren {
   IndexRoute: typeof IndexRoute
+  NewPostRoute: typeof NewPostRoute
   AuthRegisterRoute: typeof AuthRegisterRoute
   AuthSignInRoute: typeof AuthSignInRoute
   ApiAuthSplatRoute: typeof ApiAuthSplatRoute
@@ -71,6 +87,13 @@ export interface RootRouteChildren {
 
 declare module '@tanstack/react-router' {
   interface FileRoutesByPath {
+    '/new-post': {
+      id: '/new-post'
+      path: '/new-post'
+      fullPath: '/new-post'
+      preLoaderRoute: typeof NewPostRouteImport
+      parentRoute: typeof rootRouteImport
+    }
     '/': {
       id: '/'
       path: '/'
@@ -104,6 +127,7 @@ declare module '@tanstack/react-router' {
 
 const rootRouteChildren: RootRouteChildren = {
   IndexRoute: IndexRoute,
+  NewPostRoute: NewPostRoute,
   AuthRegisterRoute: AuthRegisterRoute,
   AuthSignInRoute: AuthSignInRoute,
   ApiAuthSplatRoute: ApiAuthSplatRoute,
