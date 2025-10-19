@@ -170,6 +170,9 @@ importers:
       '@weaver/backend':
         specifier: workspace:*
         version: link:../../packages/backend
+      '@weaver/ui':
+        specifier: workspace:*
+        version: link:../../packages/ui
       better-auth:
         specifier: 1.3.27
         version: 1.3.27(react-dom@19.2.0(react@19.2.0))(react@19.2.0)(solid-js@1.9.9)
