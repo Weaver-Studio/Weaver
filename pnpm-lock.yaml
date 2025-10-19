@@ -49,6 +49,9 @@ importers:
       '@weaver/backend':
         specifier: workspace:*
         version: link:../../packages/backend
+      '@weaver/ui':
+        specifier: workspace:*
+        version: link:../../packages/ui
       better-auth:
         specifier: 1.3.27
         version: 1.3.27(react-dom@19.2.0(react@19.2.0))(react@19.2.0)(solid-js@1.9.9)
@@ -89,9 +92,6 @@ importers:
         specifier: ^4.1.12
         version: 4.1.12
     devDependencies:
-      '@types/bun':
-        specifier: ^1.3.0
-        version: 1.3.0(@types/react@19.2.2)
       '@types/node':
         specifier: ^24.8.0
         version: 24.8.0
@@ -297,6 +297,9 @@ importers:
       '@weaver/backend':
         specifier: workspace:*
         version: link:../../packages/backend
+      '@weaver/ui':
+        specifier: workspace:*
+        version: link:../../packages/ui
       better-auth:
         specifier: 1.3.27
         version: 1.3.27(react-dom@19.2.0(react@19.2.0))(react@19.2.0)(solid-js@1.9.9)
@@ -312,9 +315,6 @@ importers:
       lucide-react:
         specifier: ^0.546.0
         version: 0.546.0(react@19.2.0)
-      postcss:
-        specifier: ^8.5.6
-        version: 8.5.6
       react:
         specifier: ^19.2.0
         version: 19.2.0
@@ -324,9 +324,6 @@ importers:
       tailwind-merge:
         specifier: ^3.3.1
         version: 3.3.1
-      tailwindcss:
-        specifier: ^4.1.14
-        version: 4.1.14
       typescript:
         specifier: ^5.9.3
         version: 5.9.3
@@ -337,9 +334,6 @@ importers:
         specifier: ^4.1.12
         version: 4.1.12
     devDependencies:
-      '@types/bun':
-        specifier: ^1.3.0
-        version: 1.3.0(@types/react@19.2.2)
       '@types/node':
         specifier: ^24.8.0
         version: 24.8.0
@@ -355,6 +349,12 @@ importers:
       babel-plugin-react-compiler:
         specifier: ^1.0.0
         version: 1.0.0
+      postcss:
+        specifier: ^8.5.6
+        version: 8.5.6
+      tailwindcss:
+        specifier: ^4.1.14
+        version: 4.1.14
       tw-animate-css:
         specifier: ^1.4.0
         version: 1.4.0
@@ -399,7 +399,42 @@ importers:
         specifier: ^5.9.3
         version: 5.9.3
 
-  packages/ui: {}
+  packages/ui:
+    dependencies:
+      '@radix-ui/react-slot':
+        specifier: ^1.2.3
+        version: 1.2.3(@types/react@19.2.2)(react@19.2.0)
+      class-variance-authority:
+        specifier: ^0.7.0
+        version: 0.7.1
+      clsx:
+        specifier: ^2.1.1
+        version: 2.1.1
+      lucide-react:
+        specifier: ^0.546.0
+        version: 0.546.0(react@19.2.0)
+      typescript:
+        specifier: ^5.9.3
+        version: 5.9.3
+    devDependencies:
+      '@types/node':
+        specifier: ^24.8.0
+        version: 24.8.0
+      '@types/react':
+        specifier: ^19.2.2
+        version: 19.2.2
+      postcss:
+        specifier: ^8.5.6
+        version: 8.5.6
+      tailwind-merge:
+        specifier: ^2.3.0
+        version: 2.6.0
+      tailwindcss:
+        specifier: ^4.1.14
+        version: 4.1.14
+      tw-animate-css:
+        specifier: ^1.4.0
+        version: 1.4.0
 
 packages:
 
@@ -2061,9 +2096,6 @@ packages:
   '@types/babel__traverse@7.28.0':
     resolution: {integrity: sha512-8PvcXf70gTDZBgt9ptxJ8elBeBjcLOAcOtoO/mPJjtji1+CdGbHgm77om1GrsPxsiE+uXIpNSK64UYaIwQXd4Q==}
 
-  '@types/bun@1.3.0':
-    resolution: {integrity: sha512-+lAGCYjXjip2qY375xX/scJeVRmZ5cY0wyHYyCYxNcdEXrQ4AOe3gACgd4iQ8ksOslJtW4VNxBJ8llUwc3a6AA==}
-
   '@types/estree@1.0.8':
     resolution: {integrity: sha512-dWHzHa2WqEXI/O1E9OjrocMTKJl2mSrEolh1Iomrv6U+JuNwaHXsXx9bLu5gG7BUWFIN0skIQJQ/L1rIex4X6w==}
 
@@ -2291,11 +2323,6 @@ packages:
     resolution: {integrity: sha512-lAUU+02RFBuCKQPj/P6NgjlbCnLBMp4UtgTx7vNHd3XSIJF87s9a5rA3aH2yw3GS9DqZAUbOtZdCCiZeVRqt0w==}
     engines: {node: ^6 || ^7 || ^8 || ^9 || ^10 || ^11 || ^12 || >=13.7}
     hasBin: true
-
-  bun-types@1.3.0:
-    resolution: {integrity: sha512-u8X0thhx+yJ0KmkxuEo9HAtdfgCBaM/aI9K90VQcQioAmkVp3SG3FkwWGibUFz3WdXAdcsqOcbU40lK7tbHdkQ==}
-    peerDependencies:
-      '@types/react': ^19
 
   call-bind-apply-helpers@1.0.2:
     resolution: {integrity: sha512-Sp1ablJ0ivDkSzjcaJdxEunN5/XvksFJ2sMBFfq6x0ryhQV/2b/KwFe21cMpmHtPOSij8K99/wSfoEuTObmuMQ==}
@@ -3656,6 +3683,9 @@ packages:
   supports-preserve-symlinks-flag@1.0.0:
     resolution: {integrity: sha512-ot0WnXS9fgdkgIcePe6RHNk1WA8+muPa6cSjeR3V8K27q9BB1rTE3R1p7Hv0z1ZyAc8s6Vvv8DIyWf681MAt0w==}
     engines: {node: '>= 0.4'}
+
+  tailwind-merge@2.6.0:
+    resolution: {integrity: sha512-P+Vu1qXfzediirmHOC3xKGAYeZtPcV9g76X+xg2FD4tYgR71ewMA35Y3sCz3zhiN/dwefRpJX0yBcgwi1fXNQA==}
 
   tailwind-merge@3.3.1:
     resolution: {integrity: sha512-gBXpgUm/3rp1lMZZrM/w7D8GKqshif0zAymAhbCyIt8KMe+0v9DQ7cdYLR4FHH/cKpdTXb+A/tKKU3eolfsI+g==}
@@ -5630,12 +5660,6 @@ snapshots:
     dependencies:
       '@babel/types': 7.28.4
 
-  '@types/bun@1.3.0(@types/react@19.2.2)':
-    dependencies:
-      bun-types: 1.3.0(@types/react@19.2.2)
-    transitivePeerDependencies:
-      - '@types/react'
-
   '@types/estree@1.0.8': {}
 
   '@types/json-schema@7.0.15': {}
@@ -5909,11 +5933,6 @@ snapshots:
       electron-to-chromium: 1.5.237
       node-releases: 2.0.25
       update-browserslist-db: 1.1.3(browserslist@4.26.3)
-
-  bun-types@1.3.0(@types/react@19.2.2):
-    dependencies:
-      '@types/node': 24.8.0
-      '@types/react': 19.2.2
 
   call-bind-apply-helpers@1.0.2:
     dependencies:
@@ -7368,6 +7387,8 @@ snapshots:
       has-flag: 4.0.0
 
   supports-preserve-symlinks-flag@1.0.0: {}
+
+  tailwind-merge@2.6.0: {}
 
   tailwind-merge@3.3.1: {}
 
