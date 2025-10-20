@@ -6,6 +6,15 @@
       "correctness": {
         "noChildrenProp": "off"
       }
+      // "style": {
+      //   "noNonNullAssertion": "off"
+      // }
+    }
+  },
+
+  "json": {
+    "parser": {
+      "allowComments": true
     }
   }
 }
