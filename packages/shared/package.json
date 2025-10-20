@@ -17,6 +17,6 @@
   },
 
   "exports": {
-    "./lib/*": "./lib/*.ts"
+    "./lib/*": "./src/lib/*.ts"
   }
 }

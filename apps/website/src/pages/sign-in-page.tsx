@@ -1,33 +1,23 @@
-import { Image } from "@unpic/react"
-import SignIn from "@website/components/auth/sign-in"
-import img from "@/public/teodor-drobota-smol.jpg"
-
-
+import { Image } from "@unpic/react";
+import SignIn from "@website/components/auth/sign-in";
+import img from "@website/public/teodor-drobota-smol.jpg";
 
 function SignInPage() {
+  return (
+    <div className="flex min-h-screen flex-row items-center justify-center gap-20 py-20">
+      <div className="w-[50%]">
+        <Image alt="Logo" layout="fullWidth" src={img} />
+      </div>
 
-
-	return (
-
-		<div className="flex py-20 flex-row items-center justify-center min-h-screen gap-20">
-			<div className="w-[50%]">
-				<Image
-					src={img}
-					alt="Logo"
-					layout="fullWidth"
-
-				/>
-			</div>
-
-			<div className="flex flex-col items-center justify-center gap-4">
-				<h1 className="text-4xl font-bold">Weaver</h1>
-				<p className="text-lg text-slate-500">Welcome back! Please sign in to your account.</p>
-				<SignIn />
-			</div>
-
-		</div >
-
-	)
+      <div className="flex flex-col items-center justify-center gap-4">
+        <h1 className="font-bold text-4xl">Weaver</h1>
+        <p className="text-lg text-slate-500">
+          Welcome back! Please sign in to your account.
+        </p>
+        <SignIn />
+      </div>
+    </div>
+  );
 }
 
-export default SignInPage
+export default SignInPage;

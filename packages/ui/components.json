@@ -14,7 +14,8 @@
     "components": "@weaver/ui/components",
     "ui": "@weaver/ui/components/ui",
     "utils": "@weaver/ui/lib/utils",
-    "lib": "@weaver/ui/lib"
+    "lib": "@weaver/ui/lib",
+    "hooks": "@weaver/ui/hooks"
   },
   "registries": {
     "@acme": "https://acme.com/r/{name}.json"
