@@ -27,6 +27,7 @@ export function getRouter() {
 
   const router = routerWithQueryClient(
     createRouter({
+      defaultViewTransition: true,
       routeTree,
       defaultPreload: "intent",
       scrollRestoration: true,
