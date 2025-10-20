@@ -17,10 +17,9 @@ import {
 import { createServerFn } from "@tanstack/react-start";
 import { getCookie, getRequest } from "@tanstack/react-start/server";
 import { authClient } from "@weaver/shared/lib/auth-client";
+import appCss from "@website/styles/app.css?url";
 import type { ConvexReactClient } from "convex/react";
 import type { ReactNode } from "react";
-
-import appCss from "@/styles/app.css?url";
 
 const fetchAuth = createServerFn({ method: "GET" }).handler(async () => {
   const { createAuth } = await import("@weaver/backend");

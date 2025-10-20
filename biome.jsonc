@@ -1,6 +1,14 @@
 {
   "$schema": "./node_modules/@biomejs/biome/configuration_schema.json",
   "extends": ["ultracite"],
+  "files": {
+    "includes": [
+      "!node_modules",
+      "!packages/ui/src/components/ui/*.tsx",
+      "!dist",
+      "!build"
+    ]
+  },
   "linter": {
     "rules": {
       "correctness": {

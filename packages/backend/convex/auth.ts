@@ -47,7 +47,7 @@ export const createAuth = (
     appName: "Weaver",
     baseURL: "http://test.com:5170",
 
-    trustedOrigins: [
+    trustedOrigins: async () => [
       process.env.CONVEX_SITE_URL as string,
       "http://test.com:5170",
       "http://forum.test.com:5180",
