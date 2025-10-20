@@ -1,5 +1,5 @@
 import { Image } from "@unpic/react"
-import Register from "@/components/auth/register"
+import Register from "@website/components/auth/register"
 import img from "@/public/teodor-drobota-smol.jpg"
 
 

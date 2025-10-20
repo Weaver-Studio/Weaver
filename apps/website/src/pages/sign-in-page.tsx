@@ -1,5 +1,5 @@
 import { Image } from "@unpic/react"
-import SignIn from "@/components/auth/sign-in"
+import SignIn from "@website/components/auth/sign-in"
 import img from "@/public/teodor-drobota-smol.jpg"
 
 
