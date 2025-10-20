@@ -9,14 +9,38 @@
 // Additionally, you should also exclude this file from your linter and/or formatter to prevent it from being checked or modified.
 
 import { Route as rootRouteImport } from './routes/__root'
+import { Route as WorkflowRouteImport } from './routes/workflow'
+import { Route as VideoStudioRouteImport } from './routes/video-studio'
 import { Route as SettingsRouteImport } from './routes/settings'
+import { Route as ImageStudioRouteImport } from './routes/image-studio'
+import { Route as DashboardRouteImport } from './routes/dashboard'
 import { Route as ChatRouteImport } from './routes/chat'
 import { Route as IndexRouteImport } from './routes/index'
 import { Route as ApiAuthSplatRouteImport } from './routes/api/auth/$'
 
+const WorkflowRoute = WorkflowRouteImport.update({
+  id: '/workflow',
+  path: '/workflow',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const VideoStudioRoute = VideoStudioRouteImport.update({
+  id: '/video-studio',
+  path: '/video-studio',
+  getParentRoute: () => rootRouteImport,
+} as any)
 const SettingsRoute = SettingsRouteImport.update({
   id: '/settings',
   path: '/settings',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const ImageStudioRoute = ImageStudioRouteImport.update({
+  id: '/image-studio',
+  path: '/image-studio',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const DashboardRoute = DashboardRouteImport.update({
+  id: '/dashboard',
+  path: '/dashboard',
   getParentRoute: () => rootRouteImport,
 } as any)
 const ChatRoute = ChatRouteImport.update({
@@ -38,44 +62,113 @@ const ApiAuthSplatRoute = ApiAuthSplatRouteImport.update({
 export interface FileRoutesByFullPath {
   '/': typeof IndexRoute
   '/chat': typeof ChatRoute
+  '/dashboard': typeof DashboardRoute
+  '/image-studio': typeof ImageStudioRoute
   '/settings': typeof SettingsRoute
+  '/video-studio': typeof VideoStudioRoute
+  '/workflow': typeof WorkflowRoute
   '/api/auth/$': typeof ApiAuthSplatRoute
 }
 export interface FileRoutesByTo {
   '/': typeof IndexRoute
   '/chat': typeof ChatRoute
+  '/dashboard': typeof DashboardRoute
+  '/image-studio': typeof ImageStudioRoute
   '/settings': typeof SettingsRoute
+  '/video-studio': typeof VideoStudioRoute
+  '/workflow': typeof WorkflowRoute
   '/api/auth/$': typeof ApiAuthSplatRoute
 }
 export interface FileRoutesById {
   __root__: typeof rootRouteImport
   '/': typeof IndexRoute
   '/chat': typeof ChatRoute
+  '/dashboard': typeof DashboardRoute
+  '/image-studio': typeof ImageStudioRoute
   '/settings': typeof SettingsRoute
+  '/video-studio': typeof VideoStudioRoute
+  '/workflow': typeof WorkflowRoute
   '/api/auth/$': typeof ApiAuthSplatRoute
 }
 export interface FileRouteTypes {
   fileRoutesByFullPath: FileRoutesByFullPath
-  fullPaths: '/' | '/chat' | '/settings' | '/api/auth/$'
+  fullPaths:
+    | '/'
+    | '/chat'
+    | '/dashboard'
+    | '/image-studio'
+    | '/settings'
+    | '/video-studio'
+    | '/workflow'
+    | '/api/auth/$'
   fileRoutesByTo: FileRoutesByTo
-  to: '/' | '/chat' | '/settings' | '/api/auth/$'
-  id: '__root__' | '/' | '/chat' | '/settings' | '/api/auth/$'
+  to:
+    | '/'
+    | '/chat'
+    | '/dashboard'
+    | '/image-studio'
+    | '/settings'
+    | '/video-studio'
+    | '/workflow'
+    | '/api/auth/$'
+  id:
+    | '__root__'
+    | '/'
+    | '/chat'
+    | '/dashboard'
+    | '/image-studio'
+    | '/settings'
+    | '/video-studio'
+    | '/workflow'
+    | '/api/auth/$'
   fileRoutesById: FileRoutesById
 }
 export interface RootRouteChildren {
   IndexRoute: typeof IndexRoute
   ChatRoute: typeof ChatRoute
+  DashboardRoute: typeof DashboardRoute
+  ImageStudioRoute: typeof ImageStudioRoute
   SettingsRoute: typeof SettingsRoute
+  VideoStudioRoute: typeof VideoStudioRoute
+  WorkflowRoute: typeof WorkflowRoute
   ApiAuthSplatRoute: typeof ApiAuthSplatRoute
 }
 
 declare module '@tanstack/react-router' {
   interface FileRoutesByPath {
+    '/workflow': {
+      id: '/workflow'
+      path: '/workflow'
+      fullPath: '/workflow'
+      preLoaderRoute: typeof WorkflowRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/video-studio': {
+      id: '/video-studio'
+      path: '/video-studio'
+      fullPath: '/video-studio'
+      preLoaderRoute: typeof VideoStudioRouteImport
+      parentRoute: typeof rootRouteImport
+    }
     '/settings': {
       id: '/settings'
       path: '/settings'
       fullPath: '/settings'
       preLoaderRoute: typeof SettingsRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/image-studio': {
+      id: '/image-studio'
+      path: '/image-studio'
+      fullPath: '/image-studio'
+      preLoaderRoute: typeof ImageStudioRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/dashboard': {
+      id: '/dashboard'
+      path: '/dashboard'
+      fullPath: '/dashboard'
+      preLoaderRoute: typeof DashboardRouteImport
       parentRoute: typeof rootRouteImport
     }
     '/chat': {
@@ -105,7 +198,11 @@ declare module '@tanstack/react-router' {
 const rootRouteChildren: RootRouteChildren = {
   IndexRoute: IndexRoute,
   ChatRoute: ChatRoute,
+  DashboardRoute: DashboardRoute,
+  ImageStudioRoute: ImageStudioRoute,
   SettingsRoute: SettingsRoute,
+  VideoStudioRoute: VideoStudioRoute,
+  WorkflowRoute: WorkflowRoute,
   ApiAuthSplatRoute: ApiAuthSplatRoute,
 }
 export const routeTree = rootRouteImport

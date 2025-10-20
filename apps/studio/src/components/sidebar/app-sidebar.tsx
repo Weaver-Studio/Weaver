@@ -88,8 +88,8 @@ const DefaultSidebar = () => {
             </SidebarMenuButton>
           </SidebarMenuItem>
           <SidebarMenuItem>
-            <SidebarMenuButton asChild isActive={currentPath === "/workflows"}>
-              <Link to="/workflows">
+            <SidebarMenuButton asChild isActive={currentPath === "/workflow"}>
+              <Link to="/workflow">
                 <Workflow size={16} />
                 Workflows
               </Link>
