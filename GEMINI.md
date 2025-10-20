@@ -61,6 +61,22 @@ pnpm build --filter=@weaver/studio
 pnpm build --filter=@weaver/website
 ```
 
+To run install any shadcn component, run the following command:
+
+```bash
+z packages/ui
+```
+then
+
+```bash
+pnpm dlx shadcn@latest add <component-name>
+```
+After installing a shadcn component, run the following command:
+
+```bash
+z monorepo
+```
+
 ## Development Conventions
 
 *   **Package Manager:** The project uses `pnpm` as the package manager.
