@@ -6,8 +6,6 @@ import {
   getCookieName,
 } from "@convex-dev/better-auth/react-start";
 import type { ConvexQueryClient } from "@convex-dev/react-query";
-import AppSidebar from "@studio/components/sidebar/app-sidebar";
-import { authClient } from "@studio/lib/auth-client";
 import appCss from "@studio/styles/app.css?url";
 import type { QueryClient } from "@tanstack/react-query";
 import {
@@ -20,8 +18,12 @@ import {
 import { TanStackRouterDevtools } from "@tanstack/react-router-devtools";
 import { createServerFn } from "@tanstack/react-start";
 import { getCookie, getRequest } from "@tanstack/react-start/server";
-import { SidebarProvider } from "@weaver/ui/components/ui/sidebar";
-import type { ConvexReactClient } from "convex/react";
+import { authClient } from "@weaver/shared/lib/auth-client";
+import {
+  Authenticated,
+  type ConvexReactClient,
+  Unauthenticated,
+} from "convex/react";
 import type { ReactNode } from "react";
 
 const fetchAuth = createServerFn({ method: "GET" }).handler(async () => {
@@ -98,12 +100,10 @@ function RootDocument({ children }: Readonly<{ children: ReactNode }>) {
         <HeadContent />
       </head>
       <body className="bg-neutral-950 text-neutral-50">
-        <main className="flex flex-col">
-          <SidebarProvider>
-            <AppSidebar />
-            {children}
-          </SidebarProvider>
-        </main>
+        <Authenticated>
+          <main className="flex flex-col">{children}</main>
+        </Authenticated>
+        <Unauthenticated>pls sign in</Unauthenticated>
 
         <TanStackRouterDevtools position="bottom-right" />
         <Scripts />

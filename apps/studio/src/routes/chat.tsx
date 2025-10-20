@@ -13,6 +13,7 @@ import {
   CardTitle,
 } from "@weaver/ui/components/ui/card";
 import { Input } from "@weaver/ui/components/ui/input";
+import SidebarLayout from "../components/sidebar/sidebar-layout";
 
 export const Route = createFileRoute("/chat")({
   component: Chat,
@@ -41,34 +42,36 @@ const dummyMessages = [
 
 function Chat() {
   return (
-    <div className="flex h-screen items-center justify-center">
-      <Card className="h-[80vh] w-full max-w-2xl">
-        <CardHeader>
-          <CardTitle>Chat</CardTitle>
-        </CardHeader>
-        <CardContent className="h-[calc(100%-150px)] overflow-y-auto">
-          <div className="flex flex-col gap-4">
-            {dummyMessages.map((message) => (
-              <div className="flex items-start gap-2" key={message._id}>
-                <Avatar>
-                  <AvatarImage src={message.avatar} />
-                  <AvatarFallback>{message.author[0]}</AvatarFallback>
-                </Avatar>
-                <div className="flex flex-col">
-                  <p className="font-semibold">{message.author}</p>
-                  <p>{message.body}</p>
+    <SidebarLayout>
+      <div className="flex h-screen items-center justify-center">
+        <Card className="h-[80vh] w-full max-w-2xl">
+          <CardHeader>
+            <CardTitle>Chat</CardTitle>
+          </CardHeader>
+          <CardContent className="h-[calc(100%-150px)] overflow-y-auto">
+            <div className="flex flex-col gap-4">
+              {dummyMessages.map((message) => (
+                <div className="flex items-start gap-2" key={message._id}>
+                  <Avatar>
+                    <AvatarImage src={message.avatar} />
+                    <AvatarFallback>{message.author[0]}</AvatarFallback>
+                  </Avatar>
+                  <div className="flex flex-col">
+                    <p className="font-semibold">{message.author}</p>
+                    <p>{message.body}</p>
+                  </div>
                 </div>
-              </div>
-            ))}
-          </div>
-        </CardContent>
-        <CardFooter>
-          <div className="flex w-full items-center gap-2">
-            <Input placeholder="Type a message..." />
-            <Button>Send</Button>
-          </div>
-        </CardFooter>
-      </Card>
-    </div>
+              ))}
+            </div>
+          </CardContent>
+          <CardFooter>
+            <div className="flex w-full items-center gap-2">
+              <Input placeholder="Type a message..." />
+              <Button>Send</Button>
+            </div>
+          </CardFooter>
+        </Card>
+      </div>
+    </SidebarLayout>
   );
 }

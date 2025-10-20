@@ -1,5 +1,4 @@
-import { useSidebarStore } from "@studio/state/store";
-import { Link, useRouterState } from "@tanstack/react-router";
+import { Link, useRouter } from "@tanstack/react-router";
 import { useSession } from "@weaver/shared/lib/auth-client";
 import {
   Avatar,
@@ -9,134 +8,23 @@ import {
 import { Button } from "@weaver/ui/components/ui/button";
 import {
   Sidebar,
-  SidebarContent,
   SidebarFooter,
-  SidebarHeader,
-  SidebarMenu,
   SidebarMenuButton,
-  SidebarMenuItem,
 } from "@weaver/ui/components/ui/sidebar";
 import { Authenticated } from "convex/react";
-import {
-  Bot,
-  Home,
-  ImageIcon,
-  LayoutDashboard,
-  MessageSquare,
-  Settings,
-  VideoIcon,
-  Workflow,
-} from "lucide-react";
+import { Settings } from "lucide-react";
+import ChatSidebarContent from "./chat-sidebar";
+import HomeSidebarContent from "./home-sidebar";
 
-const DefaultSidebar = () => {
-  const router = useRouterState();
-  const currentPath = router.location.pathname;
-
-  return (
-    <>
-      <SidebarHeader>
-        <Button asChild className="font-semibold text-lg" variant="link">
-          <Link to="/">Weaver Studio</Link>
-        </Button>
-      </SidebarHeader>
-      <SidebarContent className="p-2">
-        <SidebarMenu>
-          <SidebarMenuItem>
-            <SidebarMenuButton asChild isActive={currentPath === "/"}>
-              <Link to="/">
-                <Home size={16} />
-                Home
-              </Link>
-            </SidebarMenuButton>
-          </SidebarMenuItem>
-          <SidebarMenuItem>
-            <SidebarMenuButton asChild isActive={currentPath === "/dashboard"}>
-              <Link to="/dashboard">
-                <LayoutDashboard size={16} />
-                Dashboard
-              </Link>
-            </SidebarMenuButton>
-          </SidebarMenuItem>
-          <SidebarMenuItem>
-            <SidebarMenuButton asChild isActive={currentPath === "/chat"}>
-              <Link to="/chat">
-                <MessageSquare size={16} />
-                Chat
-              </Link>
-            </SidebarMenuButton>
-          </SidebarMenuItem>
-          <SidebarMenuItem>
-            <SidebarMenuButton
-              asChild
-              isActive={currentPath === "/image-studio"}
-            >
-              <Link to="/image-studio">
-                <ImageIcon size={16} />
-                Image Studio
-              </Link>
-            </SidebarMenuButton>
-          </SidebarMenuItem>
-          <SidebarMenuItem>
-            <SidebarMenuButton
-              asChild
-              isActive={currentPath === "/video-studio"}
-            >
-              <Link to="/video-studio">
-                <VideoIcon size={16} />
-                Video Studio
-              </Link>
-            </SidebarMenuButton>
-          </SidebarMenuItem>
-          <SidebarMenuItem>
-            <SidebarMenuButton asChild isActive={currentPath === "/workflow"}>
-              <Link to="/workflow">
-                <Workflow size={16} />
-                Workflows
-              </Link>
-            </SidebarMenuButton>
-          </SidebarMenuItem>
-        </SidebarMenu>
-      </SidebarContent>
-    </>
-  );
-};
-
-const ChatSidebar = () => {
-  const router = useRouterState();
-  const currentPath = router.location.pathname;
-
-  return (
-    <>
-      <SidebarHeader>
-        <Button asChild className="font-semibold text-lg" variant="link">
-          <Link to="/chat">Chat</Link>
-        </Button>
-      </SidebarHeader>
-      <SidebarContent className="p-2">
-        <SidebarMenu>
-          <SidebarMenuItem>
-            <SidebarMenuButton asChild isActive={currentPath === "/chat"}>
-              <Link to="/chat">
-                <Bot size={16} />
-                New Chat
-              </Link>
-            </SidebarMenuButton>
-          </SidebarMenuItem>
-        </SidebarMenu>
-      </SidebarContent>
-    </>
-  );
-};
-
-function AppSidebar() {
-  const { sidebarState } = useSidebarStore();
+function AppSidebar({ path }: { path: string }) {
+  const paths = useRouter().routesByPath;
   const { data } = useSession();
 
   return (
     <Authenticated>
       <Sidebar>
-        {sidebarState === "default" && <DefaultSidebar />}
-        {sidebarState === "chat" && <ChatSidebar />}
+        {path === paths["/"]?.fullPath && <HomeSidebarContent />}
+        {path === paths["/chat"]?.fullPath && <ChatSidebarContent />}
         <SidebarFooter className="h-fit">
           <SidebarMenuButton className="flex h-fit flex-row items-center justify-between gap-2 p-0 pb-1">
             <div className="flex items-start gap-2">
