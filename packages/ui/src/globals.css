@@ -1,5 +1,8 @@
-@import 'tailwindcss' source('../');
+/** biome-ignore-all lint/suspicious/noUnknownAtRules: tailwind shadcn ui */
+@import "tailwindcss";
 @import "tw-animate-css";
+
+@source '../**/*.{ts,tsx,jsx,js}';
 
 @custom-variant dark (&:is(.dark *));
 

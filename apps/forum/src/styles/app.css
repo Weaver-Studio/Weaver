@@ -1,10 +1,11 @@
-@import 'tailwindcss';
+/** biome-ignore-all lint/suspicious/noUnknownAtRules: tailwind */
+@import "tailwindcss";
 @import "tw-animate-css";
-/* @source '../'; */
+@import "@weaver/ui/globals.css";
 @source '../**/*.{ts,tsx,jsx,js}';
 @source '../../../../packages/ui/src/**/*.{ts,tsx}';
 
-@custom-variant dark (&:is(.dark *));
+/* @custom-variant dark (&:is(.dark *));
 
 @theme inline {
   --radius-sm: calc(var(--radius) - 4px);
@@ -120,4 +121,4 @@
   body {
     @apply bg-background text-foreground;
   }
-}
+} */

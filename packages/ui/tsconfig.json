@@ -1,15 +1,15 @@
 {
   "compilerOptions": {
     "jsx": "react-jsx",
-		"moduleResolution": "Bundler",
-		"module": "ESNext",
-		"target": "ESNext",
-		"skipLibCheck": true,
-		"strictNullChecks": true,
-		"strict": true,
+    "moduleResolution": "Bundler",
+    "module": "ESNext",
+    "target": "ESNext",
+    "skipLibCheck": true,
+    "strictNullChecks": true,
+    "strict": true,
     "baseUrl": ".",
     "paths": {
-      "@repo/ui/*": ["./src/*"]
+      "@weaver/ui/*": ["./src/*"]
     }
   },
   "include": ["src"],

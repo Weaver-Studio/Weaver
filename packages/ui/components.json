@@ -10,13 +10,11 @@
     "cssVariables": true,
     "prefix": ""
   },
-  "iconLibrary": "lucide",
   "aliases": {
     "components": "@weaver/ui/components",
     "ui": "@weaver/ui/components/ui",
     "utils": "@weaver/ui/lib/utils",
-    "lib": "@weaver/ui/lib",
-    "hooks": "@weaver/ui/hooks"
+    "lib": "@weaver/ui/lib"
   },
   "registries": {
     "@acme": "https://acme.com/r/{name}.json"

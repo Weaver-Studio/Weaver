@@ -20,8 +20,9 @@
     "@tanstack/react-router-with-query": "^1.130.17",
     "@tanstack/react-start": "^1.133.3",
     "@unpic/react": "^1.0.1",
-    "@weaver/ui": "workspace:*",
     "@weaver/backend": "workspace:*",
+    "@weaver/shared": "workspace:*",
+    "@weaver/ui": "workspace:*",
     "better-auth": "1.3.27",
     "class-variance-authority": "^0.7.1",
     "clsx": "^2.1.1",
@@ -34,13 +35,13 @@
     "zod": "^4.1.12"
   },
   "devDependencies": {
-    "postcss": "^8.5.6",
-    "tailwindcss": "^4.1.14",
     "@types/node": "^24.8.0",
     "@types/react": "^19.2.2",
     "@types/react-dom": "^19.2.2",
     "@vitejs/plugin-react": "^5.0.4",
     "babel-plugin-react-compiler": "^1.0.0",
+    "postcss": "^8.5.6",
+    "tailwindcss": "^4.1.14",
     "tw-animate-css": "^1.4.0",
     "vite-tsconfig-paths": "^5.1.4"
   },
