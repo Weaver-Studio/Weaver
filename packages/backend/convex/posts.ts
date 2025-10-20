@@ -1,5 +1,5 @@
-import { mutation, query } from "./_generated/server";
 import { v } from "convex/values";
+import { mutation } from "./_generated/server";
 
 export const createPost = mutation({
   args: {
@@ -16,44 +16,44 @@ export const createPost = mutation({
       userId,
       title: args.title,
       content: args.content,
-      updateAt: Date.now(),
+      updateAt: BigInt(Date.now()),
     });
     return post;
   },
 });
 
-export const getPosts = query({
-  handler: async (ctx) => {
-    const posts = await ctx.db.query("posts").order("desc").collect();
-    return Promise.all(
-      posts.map(async (post) => {
-        const user = await ctx.db
-          .query("users")
-          .filter((q) => q.eq(q.field("subject"), post.userId))
-          .first();
-        return {
-          ...post,
-          author: user,
-        };
-      })
-    );
-  },
-});
+// export const getPosts = query({
+//   handler: async (ctx) => {
+//     const posts = await ctx.db.query("posts").order("desc").collect();
+//     return Promise.all(
+//       posts.map(async (post) => {
+//         const user = await ctx.db
+//           .query("users")
+//           .filter((q) => q.eq(q.field("subject"), post.userId))
+//           .first();
+//         return {
+//           ...post,
+//           author: user,
+//         };
+//       })
+//     );
+//   },
+// });
 
-export const getPost = query({
-  args: { postId: v.id("posts") },
-  handler: async (ctx, args) => {
-    const post = await ctx.db.get(args.postId);
-    if (!post) {
-      return null;
-    }
-    const user = await ctx.db
-      .query("users")
-      .filter((q) => q.eq(q.field("subject"), post.userId))
-      .first();
-    return {
-      ...post,
-      author: user,
-    };
-  },
-});
+// export const getPost = query({
+//   args: { postId: v.id("posts") },
+//   handler: async (ctx, args) => {
+//     const post = await ctx.db.get(args.postId);
+//     if (!post) {
+//       return null;
+//     }
+//     const user = await ctx.db
+//       .query("users")
+//       .filter((q) => q.eq(q.field("subject"), post.userId))
+//       .first();
+//     return {
+//       ...post,
+//       author: user,
+//     };
+//   },
+// });

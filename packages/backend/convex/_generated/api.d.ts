@@ -13,7 +13,6 @@ import type * as betterAuth__generated_api from "../betterAuth/_generated/api.js
 import type * as betterAuth__generated_server from "../betterAuth/_generated/server.js";
 import type * as betterAuth_adapter from "../betterAuth/adapter.js";
 import type * as betterAuth_auth from "../betterAuth/auth.js";
-import type * as comments from "../comments.js";
 import type * as http from "../http.js";
 import type * as messages from "../messages.js";
 import type * as posts from "../posts.js";
@@ -39,7 +38,6 @@ declare const fullApi: ApiFromModules<{
   "betterAuth/_generated/server": typeof betterAuth__generated_server;
   "betterAuth/adapter": typeof betterAuth_adapter;
   "betterAuth/auth": typeof betterAuth_auth;
-  comments: typeof comments;
   http: typeof http;
   messages: typeof messages;
   posts: typeof posts;
