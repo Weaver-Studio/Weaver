@@ -6,7 +6,7 @@ import {
   getCookieName,
 } from "@convex-dev/better-auth/react-start";
 import type { ConvexQueryClient } from "@convex-dev/react-query";
-import AppSidebar from "@studio/components/sidebar/sidebar";
+import AppSidebar from "@studio/components/sidebar/app-sidebar";
 import { authClient } from "@studio/lib/auth-client";
 import appCss from "@studio/styles/app.css?url";
 import type { QueryClient } from "@tanstack/react-query";
@@ -105,7 +105,7 @@ function RootDocument({ children }: Readonly<{ children: ReactNode }>) {
           </SidebarProvider>
         </main>
 
-        <TanStackRouterDevtools />
+        <TanStackRouterDevtools position="bottom-right" />
         <Scripts />
       </body>
     </html>
