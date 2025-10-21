@@ -11,6 +11,10 @@
   },
   "linter": {
     "rules": {
+      "suspicious": {
+        "noConsole": "off",
+        "useAwait": "off"
+      },
       "correctness": {
         "noChildrenProp": "off"
       }

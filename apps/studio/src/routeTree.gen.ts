@@ -14,8 +14,9 @@ import { Route as VideoStudioRouteImport } from './routes/video-studio'
 import { Route as SettingsRouteImport } from './routes/settings'
 import { Route as ImageStudioRouteImport } from './routes/image-studio'
 import { Route as DashboardRouteImport } from './routes/dashboard'
-import { Route as ChatRouteImport } from './routes/chat'
 import { Route as IndexRouteImport } from './routes/index'
+import { Route as ChatIndexRouteImport } from './routes/chat/index'
+import { Route as ChatThreadIdRouteImport } from './routes/chat/$thread-id'
 import { Route as ApiAuthSplatRouteImport } from './routes/api/auth/$'
 
 const WorkflowRoute = WorkflowRouteImport.update({
@@ -43,14 +44,19 @@ const DashboardRoute = DashboardRouteImport.update({
   path: '/dashboard',
   getParentRoute: () => rootRouteImport,
 } as any)
-const ChatRoute = ChatRouteImport.update({
-  id: '/chat',
-  path: '/chat',
-  getParentRoute: () => rootRouteImport,
-} as any)
 const IndexRoute = IndexRouteImport.update({
   id: '/',
   path: '/',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const ChatIndexRoute = ChatIndexRouteImport.update({
+  id: '/chat/',
+  path: '/chat/',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const ChatThreadIdRoute = ChatThreadIdRouteImport.update({
+  id: '/chat/$thread-id',
+  path: '/chat/$thread-id',
   getParentRoute: () => rootRouteImport,
 } as any)
 const ApiAuthSplatRoute = ApiAuthSplatRouteImport.update({
@@ -61,76 +67,83 @@ const ApiAuthSplatRoute = ApiAuthSplatRouteImport.update({
 
 export interface FileRoutesByFullPath {
   '/': typeof IndexRoute
-  '/chat': typeof ChatRoute
   '/dashboard': typeof DashboardRoute
   '/image-studio': typeof ImageStudioRoute
   '/settings': typeof SettingsRoute
   '/video-studio': typeof VideoStudioRoute
   '/workflow': typeof WorkflowRoute
+  '/chat/$thread-id': typeof ChatThreadIdRoute
+  '/chat': typeof ChatIndexRoute
   '/api/auth/$': typeof ApiAuthSplatRoute
 }
 export interface FileRoutesByTo {
   '/': typeof IndexRoute
-  '/chat': typeof ChatRoute
   '/dashboard': typeof DashboardRoute
   '/image-studio': typeof ImageStudioRoute
   '/settings': typeof SettingsRoute
   '/video-studio': typeof VideoStudioRoute
   '/workflow': typeof WorkflowRoute
+  '/chat/$thread-id': typeof ChatThreadIdRoute
+  '/chat': typeof ChatIndexRoute
   '/api/auth/$': typeof ApiAuthSplatRoute
 }
 export interface FileRoutesById {
   __root__: typeof rootRouteImport
   '/': typeof IndexRoute
-  '/chat': typeof ChatRoute
   '/dashboard': typeof DashboardRoute
   '/image-studio': typeof ImageStudioRoute
   '/settings': typeof SettingsRoute
   '/video-studio': typeof VideoStudioRoute
   '/workflow': typeof WorkflowRoute
+  '/chat/$thread-id': typeof ChatThreadIdRoute
+  '/chat/': typeof ChatIndexRoute
   '/api/auth/$': typeof ApiAuthSplatRoute
 }
 export interface FileRouteTypes {
   fileRoutesByFullPath: FileRoutesByFullPath
   fullPaths:
     | '/'
-    | '/chat'
     | '/dashboard'
     | '/image-studio'
     | '/settings'
     | '/video-studio'
     | '/workflow'
+    | '/chat/$thread-id'
+    | '/chat'
     | '/api/auth/$'
   fileRoutesByTo: FileRoutesByTo
   to:
     | '/'
-    | '/chat'
     | '/dashboard'
     | '/image-studio'
     | '/settings'
     | '/video-studio'
     | '/workflow'
+    | '/chat/$thread-id'
+    | '/chat'
     | '/api/auth/$'
   id:
     | '__root__'
     | '/'
-    | '/chat'
     | '/dashboard'
     | '/image-studio'
     | '/settings'
     | '/video-studio'
     | '/workflow'
+    | '/chat/$thread-id'
+    | '/chat/'
     | '/api/auth/$'
   fileRoutesById: FileRoutesById
 }
 export interface RootRouteChildren {
   IndexRoute: typeof IndexRoute
-  ChatRoute: typeof ChatRoute
   DashboardRoute: typeof DashboardRoute
   ImageStudioRoute: typeof ImageStudioRoute
   SettingsRoute: typeof SettingsRoute
   VideoStudioRoute: typeof VideoStudioRoute
   WorkflowRoute: typeof WorkflowRoute
+  ChatThreadIdRoute: typeof ChatThreadIdRoute
+  ChatIndexRoute: typeof ChatIndexRoute
   ApiAuthSplatRoute: typeof ApiAuthSplatRoute
 }
 
@@ -171,18 +184,25 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof DashboardRouteImport
       parentRoute: typeof rootRouteImport
     }
-    '/chat': {
-      id: '/chat'
-      path: '/chat'
-      fullPath: '/chat'
-      preLoaderRoute: typeof ChatRouteImport
-      parentRoute: typeof rootRouteImport
-    }
     '/': {
       id: '/'
       path: '/'
       fullPath: '/'
       preLoaderRoute: typeof IndexRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/chat/': {
+      id: '/chat/'
+      path: '/chat'
+      fullPath: '/chat'
+      preLoaderRoute: typeof ChatIndexRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/chat/$thread-id': {
+      id: '/chat/$thread-id'
+      path: '/chat/$thread-id'
+      fullPath: '/chat/$thread-id'
+      preLoaderRoute: typeof ChatThreadIdRouteImport
       parentRoute: typeof rootRouteImport
     }
     '/api/auth/$': {
@@ -197,12 +217,13 @@ declare module '@tanstack/react-router' {
 
 const rootRouteChildren: RootRouteChildren = {
   IndexRoute: IndexRoute,
-  ChatRoute: ChatRoute,
   DashboardRoute: DashboardRoute,
   ImageStudioRoute: ImageStudioRoute,
   SettingsRoute: SettingsRoute,
   VideoStudioRoute: VideoStudioRoute,
   WorkflowRoute: WorkflowRoute,
+  ChatThreadIdRoute: ChatThreadIdRoute,
+  ChatIndexRoute: ChatIndexRoute,
   ApiAuthSplatRoute: ApiAuthSplatRoute,
 }
 export const routeTree = rootRouteImport

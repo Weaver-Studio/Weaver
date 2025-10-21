@@ -15,8 +15,10 @@ import type * as betterAuth_adapter from "../betterAuth/adapter.js";
 import type * as betterAuth_auth from "../betterAuth/auth.js";
 import type * as http from "../http.js";
 import type * as messages from "../messages.js";
+import type * as openRouter_llm from "../openRouter/llm.js";
 import type * as posts from "../posts.js";
 import type * as threads from "../threads.js";
+import type * as utils from "../utils.js";
 
 import type {
   ApiFromModules,
@@ -40,8 +42,10 @@ declare const fullApi: ApiFromModules<{
   "betterAuth/auth": typeof betterAuth_auth;
   http: typeof http;
   messages: typeof messages;
+  "openRouter/llm": typeof openRouter_llm;
   posts: typeof posts;
   threads: typeof threads;
+  utils: typeof utils;
 }>;
 declare const fullApiWithMounts: typeof fullApi;
 
