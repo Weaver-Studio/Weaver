@@ -1,5 +1,3 @@
-import axios from "axios";
-
 const baseURL = import.meta.env.VITE_CONVEX_SITE_URL;
 
 type methodtypes = "GET" | "POST" | "PUT" | "DELETE";
@@ -14,14 +12,7 @@ export const customFetch = <T>(options: fetchOptions<T>) =>
     method: options.method,
     headers: {
       "Content-Type": "application/json",
-      Authorization: `Bearer ${options.token}`,
+      Authorization: options.token ? `Bearer ${options.token}` : "",
     },
     body: options.body ? JSON.stringify(options.body) : undefined,
   });
-
-export const Axios = axios.create({
-  baseURL: import.meta.env.VITE_CONVEX_SITE_URL,
-  headers: {
-    "Content-Type": "application/json",
-  },
-});
