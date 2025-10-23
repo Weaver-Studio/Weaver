@@ -1,5 +1,6 @@
+import { v } from "convex/values";
 import OpenAI from "openai";
-import { httpAction } from "../_generated/server";
+import { httpAction, internalAction } from "../_generated/server";
 import { buildCorsHeaders } from "../utils";
 
 const openai = new OpenAI({
@@ -8,6 +9,27 @@ const openai = new OpenAI({
   defaultHeaders: {
     "HTTP-Referer": "https://app.test.com",
     "X-Title": "Weaver",
+  },
+});
+
+export const getTitle = internalAction({
+  args: { prompt: v.string() },
+  handler: async (_ctx, args) => {
+    const title = await openai.chat.completions.create({
+      model: "z-ai/glm-4.5-air:free",
+      messages: [
+        {
+          role: "system",
+          content:
+            "You are a helpful genius that gives a good, to the point minimal title for a chat.",
+        },
+        {
+          role: "user",
+          content: args.prompt,
+        },
+      ],
+    });
+    return title.choices[0].message.content || "Looking for a good title";
   },
 });
 

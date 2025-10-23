@@ -1,65 +1,77 @@
-import { customFetch } from "@studio/api/cutom-fetch";
 import { ChatInputPanel } from "@studio/components/chat/chat-input-panel";
+import { ChatLayout } from "@studio/components/chat/chat-layout";
+import { StreamingMessageView } from "@studio/components/chat/streaming-message-view";
 import SidebarLayout from "@studio/components/sidebar/sidebar-layout";
 import WelcomeMessage from "@studio/components/welcome-message";
+import { useChatStore } from "@studio/state/chat-store";
+import { useRouter } from "@tanstack/react-router";
+import { api } from "@weaver/backend/convex/_generated/api";
+import type { Id } from "@weaver/backend/convex/_generated/dataModel";
 import { useSession } from "@weaver/shared/lib/auth-client";
-import { useState } from "react";
+import { useMutation } from "convex/react";
+import { useEffect, useState } from "react";
+import { useChatStreaming } from "@studio/hooks/useChatStreaming";
+import { useWarmedThread } from "@studio/hooks/useWarmedThread";
 
 function Chat() {
   const { data } = useSession();
+  const router = useRouter();
+  const { warmedThreadId, ensureWarmedThread, swap } = useWarmedThread();
+  const createMessageMutation = useMutation(api.messages.create);
   const [text, setText] = useState<string>("");
   const [isLoading, setIsLoading] = useState(false);
 
-  async function newChat({
-    data,
-    inputValue,
-    model,
-    thinkingLevel,
-  }: {
-    data: any;
-    inputValue: string;
-    model: string;
-    thinkingLevel: string;
-  }) {
-    setIsLoading(true);
-    setText("");
-    const response = await customFetch({
-      token: data?.session?.token as string,
-      method: "POST",
-      path: "chat",
-      body: JSON.stringify({ message: inputValue, model, thinkingLevel }),
-    });
-
-    const textDecoder = new TextDecoder();
-
-    if (response.body === null) {
-      console.log("null");
-      setIsLoading(false);
-      return;
-    }
-    const reader = response.body.getReader();
-    while (true) {
-      const { done, value } = await reader.read();
-      if (done) {
-        console.log("done", done);
-        setIsLoading(false);
-        return;
+  const { start } = useChatStreaming({
+    createMessage: createMessageMutation,
+    token: data?.session?.token,
+    onComplete: async ({ threadId, aiText }) => {
+      try {
+        await router.navigate({
+          to: "/chat/$threadId",
+          params: { threadId },
+        });
+        swap(threadId);
+      } catch (error) {
+        console.error("Failed to navigate:", error);
+        await router.navigate({
+          to: "/chat/$threadId",
+          params: { threadId },
+        });
       }
-      setText((prevtext) => prevtext + textDecoder.decode(value));
-    }
-  }
+    },
+    onError: (error) => {
+      console.error("Streaming error:", error);
+      setIsLoading(false);
+    },
+  });
 
-  const handleSendMessage = (
+  useEffect(() => {
+    ensureWarmedThread().catch((error) => {
+      console.error("Failed to ensure warmed thread:", error);
+    });
+  }, [ensureWarmedThread]);
+
+  const handleSendMessage = async (
     message: string,
     model: string,
     thinkingLevel: string
   ) => {
-    newChat({
-      data,
-      inputValue: message,
-      model,
-      thinkingLevel,
-    });
+    try {
+      const threadId = await ensureWarmedThread();
+      setIsLoading(true);
+      setText("");
+
+      await createMessageMutation({ threadId, content: message });
+      await start({
+        threadId,
+        userMessage: message,
+        model,
+        thinkingLevel,
+      });
+    } catch (error) {
+      console.error("Failed to send message:", error);
+      setIsLoading(false);
+    }
   };
 
   const handlePromptClick = (prompt: string) => {
@@ -69,35 +81,20 @@ function Chat() {
 
   return (
     <SidebarLayout>
-      <div className="flex h-screen w-full flex-col">
-        <div className="flex-1 overflow-y-auto p-4">
-          {text || isLoading ? (
-            <div className="flex flex-col gap-4">
-              <div className="mb-4 rounded-lg bg-muted p-4">
-                <p>
-                  {text}
-                  {isLoading && !text ? "Thinking..." : ""}
-                </p>
-              </div>
-            </div>
-          ) : (
-            <WelcomeMessage onPromptClick={handlePromptClick} />
-          )}
-        </div>
-        <ChatInputPanel
-          isLoading={isLoading}
-          onSendMessage={handleSendMessage}
-        />
-      </div>
+      <ChatLayout
+        input={<ChatInputPanel isLoading={isLoading} onSendMessage={handleSendMessage} />}
+      >
+        {text || isLoading ? (
+          <StreamingMessageView
+            streamingText={text}
+            isStreaming={isLoading}
+          />
+        ) : (
+          <WelcomeMessage onPromptClick={handlePromptClick} />
+        )}
+      </ChatLayout>
     </SidebarLayout>
   );
-}
-
-export default Chat;
-<ChatInputPanel isLoading={isLoading} onSendMessage={handleSendMessage} />;
-</div>
-    </SidebarLayout>
-  )
 }
 
 export default Chat;

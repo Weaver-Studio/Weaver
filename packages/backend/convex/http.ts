@@ -3,7 +3,7 @@ import { httpAction } from "./_generated/server";
 import { authComponent, createAuth } from "./auth";
 import { chat } from "./openRouter/llm";
 
-const http = httpRouter();
+export const http = httpRouter();
 
 // CORS handling is required for client side frameworks
 authComponent.registerRoutes(http, createAuth, { cors: true });

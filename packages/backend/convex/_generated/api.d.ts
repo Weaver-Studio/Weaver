@@ -17,7 +17,8 @@ import type * as http from "../http.js";
 import type * as messages from "../messages.js";
 import type * as openRouter_llm from "../openRouter/llm.js";
 import type * as posts from "../posts.js";
-import type * as threads from "../threads.js";
+import type * as threads_threadMutation from "../threads/threadMutation.js";
+import type * as threads_threadQueries from "../threads/threadQueries.js";
 import type * as utils from "../utils.js";
 
 import type {
@@ -44,7 +45,8 @@ declare const fullApi: ApiFromModules<{
   messages: typeof messages;
   "openRouter/llm": typeof openRouter_llm;
   posts: typeof posts;
-  threads: typeof threads;
+  "threads/threadMutation": typeof threads_threadMutation;
+  "threads/threadQueries": typeof threads_threadQueries;
   utils: typeof utils;
 }>;
 declare const fullApiWithMounts: typeof fullApi;
