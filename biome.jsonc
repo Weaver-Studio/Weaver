@@ -12,15 +12,14 @@
   "linter": {
     "rules": {
       "suspicious": {
-        "noConsole": "off",
-        "useAwait": "off"
+        "noConsole": "warn"
       },
       "correctness": {
         "noChildrenProp": "off"
+      },
+      "style": {
+        "useBlockStatements": "off"
       }
-      // "style": {
-      //   "noNonNullAssertion": "off"
-      // }
     }
   },
 
