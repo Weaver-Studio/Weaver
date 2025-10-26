@@ -9,109 +9,133 @@
 // Additionally, you should also exclude this file from your linter and/or formatter to prevent it from being checked or modified.
 
 import { Route as rootRouteImport } from './routes/__root'
-import { Route as TestRouteImport } from './routes/test'
-import { Route as AuthRouteImport } from './routes/auth'
 import { Route as IndexRouteImport } from './routes/index'
-import { Route as AuthSignInRouteImport } from './routes/_auth/sign-in'
-import { Route as AuthRegisterRouteImport } from './routes/_auth/register'
-import { Route as ApiAuthSplatRouteImport } from './routes/api/auth/$'
+import { Route as DemoStartServerFuncsRouteImport } from './routes/demo/start.server-funcs'
+import { Route as DemoStartApiRequestRouteImport } from './routes/demo/start.api-request'
+import { Route as DemoApiNamesRouteImport } from './routes/demo/api.names'
+import { Route as DemoStartSsrIndexRouteImport } from './routes/demo/start.ssr.index'
+import { Route as DemoStartSsrSpaModeRouteImport } from './routes/demo/start.ssr.spa-mode'
+import { Route as DemoStartSsrFullSsrRouteImport } from './routes/demo/start.ssr.full-ssr'
+import { Route as DemoStartSsrDataOnlyRouteImport } from './routes/demo/start.ssr.data-only'
 
-const TestRoute = TestRouteImport.update({
-  id: '/test',
-  path: '/test',
-  getParentRoute: () => rootRouteImport,
-} as any)
-const AuthRoute = AuthRouteImport.update({
-  id: '/auth',
-  path: '/auth',
-  getParentRoute: () => rootRouteImport,
-} as any)
 const IndexRoute = IndexRouteImport.update({
   id: '/',
   path: '/',
   getParentRoute: () => rootRouteImport,
 } as any)
-const AuthSignInRoute = AuthSignInRouteImport.update({
-  id: '/_auth/sign-in',
-  path: '/sign-in',
+const DemoStartServerFuncsRoute = DemoStartServerFuncsRouteImport.update({
+  id: '/demo/start/server-funcs',
+  path: '/demo/start/server-funcs',
   getParentRoute: () => rootRouteImport,
 } as any)
-const AuthRegisterRoute = AuthRegisterRouteImport.update({
-  id: '/_auth/register',
-  path: '/register',
+const DemoStartApiRequestRoute = DemoStartApiRequestRouteImport.update({
+  id: '/demo/start/api-request',
+  path: '/demo/start/api-request',
   getParentRoute: () => rootRouteImport,
 } as any)
-const ApiAuthSplatRoute = ApiAuthSplatRouteImport.update({
-  id: '/api/auth/$',
-  path: '/api/auth/$',
+const DemoApiNamesRoute = DemoApiNamesRouteImport.update({
+  id: '/demo/api/names',
+  path: '/demo/api/names',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const DemoStartSsrIndexRoute = DemoStartSsrIndexRouteImport.update({
+  id: '/demo/start/ssr/',
+  path: '/demo/start/ssr/',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const DemoStartSsrSpaModeRoute = DemoStartSsrSpaModeRouteImport.update({
+  id: '/demo/start/ssr/spa-mode',
+  path: '/demo/start/ssr/spa-mode',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const DemoStartSsrFullSsrRoute = DemoStartSsrFullSsrRouteImport.update({
+  id: '/demo/start/ssr/full-ssr',
+  path: '/demo/start/ssr/full-ssr',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const DemoStartSsrDataOnlyRoute = DemoStartSsrDataOnlyRouteImport.update({
+  id: '/demo/start/ssr/data-only',
+  path: '/demo/start/ssr/data-only',
   getParentRoute: () => rootRouteImport,
 } as any)
 
 export interface FileRoutesByFullPath {
   '/': typeof IndexRoute
-  '/auth': typeof AuthRoute
-  '/test': typeof TestRoute
-  '/register': typeof AuthRegisterRoute
-  '/sign-in': typeof AuthSignInRoute
-  '/api/auth/$': typeof ApiAuthSplatRoute
+  '/demo/api/names': typeof DemoApiNamesRoute
+  '/demo/start/api-request': typeof DemoStartApiRequestRoute
+  '/demo/start/server-funcs': typeof DemoStartServerFuncsRoute
+  '/demo/start/ssr/data-only': typeof DemoStartSsrDataOnlyRoute
+  '/demo/start/ssr/full-ssr': typeof DemoStartSsrFullSsrRoute
+  '/demo/start/ssr/spa-mode': typeof DemoStartSsrSpaModeRoute
+  '/demo/start/ssr': typeof DemoStartSsrIndexRoute
 }
 export interface FileRoutesByTo {
   '/': typeof IndexRoute
-  '/auth': typeof AuthRoute
-  '/test': typeof TestRoute
-  '/register': typeof AuthRegisterRoute
-  '/sign-in': typeof AuthSignInRoute
-  '/api/auth/$': typeof ApiAuthSplatRoute
+  '/demo/api/names': typeof DemoApiNamesRoute
+  '/demo/start/api-request': typeof DemoStartApiRequestRoute
+  '/demo/start/server-funcs': typeof DemoStartServerFuncsRoute
+  '/demo/start/ssr/data-only': typeof DemoStartSsrDataOnlyRoute
+  '/demo/start/ssr/full-ssr': typeof DemoStartSsrFullSsrRoute
+  '/demo/start/ssr/spa-mode': typeof DemoStartSsrSpaModeRoute
+  '/demo/start/ssr': typeof DemoStartSsrIndexRoute
 }
 export interface FileRoutesById {
   __root__: typeof rootRouteImport
   '/': typeof IndexRoute
-  '/auth': typeof AuthRoute
-  '/test': typeof TestRoute
-  '/_auth/register': typeof AuthRegisterRoute
-  '/_auth/sign-in': typeof AuthSignInRoute
-  '/api/auth/$': typeof ApiAuthSplatRoute
+  '/demo/api/names': typeof DemoApiNamesRoute
+  '/demo/start/api-request': typeof DemoStartApiRequestRoute
+  '/demo/start/server-funcs': typeof DemoStartServerFuncsRoute
+  '/demo/start/ssr/data-only': typeof DemoStartSsrDataOnlyRoute
+  '/demo/start/ssr/full-ssr': typeof DemoStartSsrFullSsrRoute
+  '/demo/start/ssr/spa-mode': typeof DemoStartSsrSpaModeRoute
+  '/demo/start/ssr/': typeof DemoStartSsrIndexRoute
 }
 export interface FileRouteTypes {
   fileRoutesByFullPath: FileRoutesByFullPath
-  fullPaths: '/' | '/auth' | '/test' | '/register' | '/sign-in' | '/api/auth/$'
+  fullPaths:
+    | '/'
+    | '/demo/api/names'
+    | '/demo/start/api-request'
+    | '/demo/start/server-funcs'
+    | '/demo/start/ssr/data-only'
+    | '/demo/start/ssr/full-ssr'
+    | '/demo/start/ssr/spa-mode'
+    | '/demo/start/ssr'
   fileRoutesByTo: FileRoutesByTo
-  to: '/' | '/auth' | '/test' | '/register' | '/sign-in' | '/api/auth/$'
+  to:
+    | '/'
+    | '/demo/api/names'
+    | '/demo/start/api-request'
+    | '/demo/start/server-funcs'
+    | '/demo/start/ssr/data-only'
+    | '/demo/start/ssr/full-ssr'
+    | '/demo/start/ssr/spa-mode'
+    | '/demo/start/ssr'
   id:
     | '__root__'
     | '/'
-    | '/auth'
-    | '/test'
-    | '/_auth/register'
-    | '/_auth/sign-in'
-    | '/api/auth/$'
+    | '/demo/api/names'
+    | '/demo/start/api-request'
+    | '/demo/start/server-funcs'
+    | '/demo/start/ssr/data-only'
+    | '/demo/start/ssr/full-ssr'
+    | '/demo/start/ssr/spa-mode'
+    | '/demo/start/ssr/'
   fileRoutesById: FileRoutesById
 }
 export interface RootRouteChildren {
   IndexRoute: typeof IndexRoute
-  AuthRoute: typeof AuthRoute
-  TestRoute: typeof TestRoute
-  AuthRegisterRoute: typeof AuthRegisterRoute
-  AuthSignInRoute: typeof AuthSignInRoute
-  ApiAuthSplatRoute: typeof ApiAuthSplatRoute
+  DemoApiNamesRoute: typeof DemoApiNamesRoute
+  DemoStartApiRequestRoute: typeof DemoStartApiRequestRoute
+  DemoStartServerFuncsRoute: typeof DemoStartServerFuncsRoute
+  DemoStartSsrDataOnlyRoute: typeof DemoStartSsrDataOnlyRoute
+  DemoStartSsrFullSsrRoute: typeof DemoStartSsrFullSsrRoute
+  DemoStartSsrSpaModeRoute: typeof DemoStartSsrSpaModeRoute
+  DemoStartSsrIndexRoute: typeof DemoStartSsrIndexRoute
 }
 
 declare module '@tanstack/react-router' {
   interface FileRoutesByPath {
-    '/test': {
-      id: '/test'
-      path: '/test'
-      fullPath: '/test'
-      preLoaderRoute: typeof TestRouteImport
-      parentRoute: typeof rootRouteImport
-    }
-    '/auth': {
-      id: '/auth'
-      path: '/auth'
-      fullPath: '/auth'
-      preLoaderRoute: typeof AuthRouteImport
-      parentRoute: typeof rootRouteImport
-    }
     '/': {
       id: '/'
       path: '/'
@@ -119,25 +143,53 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof IndexRouteImport
       parentRoute: typeof rootRouteImport
     }
-    '/_auth/sign-in': {
-      id: '/_auth/sign-in'
-      path: '/sign-in'
-      fullPath: '/sign-in'
-      preLoaderRoute: typeof AuthSignInRouteImport
+    '/demo/start/server-funcs': {
+      id: '/demo/start/server-funcs'
+      path: '/demo/start/server-funcs'
+      fullPath: '/demo/start/server-funcs'
+      preLoaderRoute: typeof DemoStartServerFuncsRouteImport
       parentRoute: typeof rootRouteImport
     }
-    '/_auth/register': {
-      id: '/_auth/register'
-      path: '/register'
-      fullPath: '/register'
-      preLoaderRoute: typeof AuthRegisterRouteImport
+    '/demo/start/api-request': {
+      id: '/demo/start/api-request'
+      path: '/demo/start/api-request'
+      fullPath: '/demo/start/api-request'
+      preLoaderRoute: typeof DemoStartApiRequestRouteImport
       parentRoute: typeof rootRouteImport
     }
-    '/api/auth/$': {
-      id: '/api/auth/$'
-      path: '/api/auth/$'
-      fullPath: '/api/auth/$'
-      preLoaderRoute: typeof ApiAuthSplatRouteImport
+    '/demo/api/names': {
+      id: '/demo/api/names'
+      path: '/demo/api/names'
+      fullPath: '/demo/api/names'
+      preLoaderRoute: typeof DemoApiNamesRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/demo/start/ssr/': {
+      id: '/demo/start/ssr/'
+      path: '/demo/start/ssr'
+      fullPath: '/demo/start/ssr'
+      preLoaderRoute: typeof DemoStartSsrIndexRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/demo/start/ssr/spa-mode': {
+      id: '/demo/start/ssr/spa-mode'
+      path: '/demo/start/ssr/spa-mode'
+      fullPath: '/demo/start/ssr/spa-mode'
+      preLoaderRoute: typeof DemoStartSsrSpaModeRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/demo/start/ssr/full-ssr': {
+      id: '/demo/start/ssr/full-ssr'
+      path: '/demo/start/ssr/full-ssr'
+      fullPath: '/demo/start/ssr/full-ssr'
+      preLoaderRoute: typeof DemoStartSsrFullSsrRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/demo/start/ssr/data-only': {
+      id: '/demo/start/ssr/data-only'
+      path: '/demo/start/ssr/data-only'
+      fullPath: '/demo/start/ssr/data-only'
+      preLoaderRoute: typeof DemoStartSsrDataOnlyRouteImport
       parentRoute: typeof rootRouteImport
     }
   }
@@ -145,11 +197,13 @@ declare module '@tanstack/react-router' {
 
 const rootRouteChildren: RootRouteChildren = {
   IndexRoute: IndexRoute,
-  AuthRoute: AuthRoute,
-  TestRoute: TestRoute,
-  AuthRegisterRoute: AuthRegisterRoute,
-  AuthSignInRoute: AuthSignInRoute,
-  ApiAuthSplatRoute: ApiAuthSplatRoute,
+  DemoApiNamesRoute: DemoApiNamesRoute,
+  DemoStartApiRequestRoute: DemoStartApiRequestRoute,
+  DemoStartServerFuncsRoute: DemoStartServerFuncsRoute,
+  DemoStartSsrDataOnlyRoute: DemoStartSsrDataOnlyRoute,
+  DemoStartSsrFullSsrRoute: DemoStartSsrFullSsrRoute,
+  DemoStartSsrSpaModeRoute: DemoStartSsrSpaModeRoute,
+  DemoStartSsrIndexRoute: DemoStartSsrIndexRoute,
 }
 export const routeTree = rootRouteImport
   ._addFileChildren(rootRouteChildren)

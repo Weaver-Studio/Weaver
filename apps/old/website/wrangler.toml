@@ -1,0 +1,37 @@
+name = "weaver-api"
+main = "src/app.ts"
+compatibility_date = "2025-10-23"
+compatibility_flags = ["nodejs_compat"]
+
+[dev]
+host = "api.test.com"
+port = 5160
+
+# Uncomment and configure the following sections as needed:
+
+# [build]
+# command = "pnpm run build"
+
+# [vars]
+# MY_VAR = "my-variable"
+
+[[kv_namespaces]]
+binding = "SESSION_KV"
+id = "b4a323b309f842668d510935ce736c51"
+
+# [[r2_buckets]]
+# binding = "MY_BUCKET"
+# bucket_name = "my-bucket"
+
+[[d1_databases]]
+binding = "DB"
+database_name = "weaver-db"
+database_id = "3e5b670c-86c4-43b8-9637-66058b2aa62e"
+migrations_dir = "drizzle/migrations"
+
+# [ai]
+# binding = "AI"
+
+# [observability]
+# enabled = true
+# head_sampling_rate = 1

@@ -5,7 +5,7 @@ import { index, integer, sqliteTable, text } from "drizzle-orm/sqlite-core";
 export const userState = sqliteTable(
   "user_state",
   {
-    userId: text("user_id").notNull(),
+    userId: text("user_id").primaryKey(),
     theme: text("theme"), // Foreign key reference will be handled at application level
     warmedThreadId: text("warmed_thread_id"), // Foreign key reference will be handled at application level
     updatedAt: integer("updated_at", { mode: "timestamp" }).notNull(),
