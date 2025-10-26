@@ -5,12 +5,22 @@
     "includes": [
       "!node_modules",
       "!packages/ui/src/components/ui/*.tsx",
+      "!**/worker-configuration.d.ts",
       "!dist",
       "!build"
     ]
   },
   "linter": {
     "rules": {
+      "performance": {
+        "noNamespaceImport": "off"
+      },
+      // "complexity": {
+      //   "noForEach": "off"
+      // },
+      "nursery": {
+        "useConsistentTypeDefinitions": "off"
+      },
       "suspicious": {
         "noConsole": "warn"
       },

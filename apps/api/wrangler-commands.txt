@@ -1,0 +1,3 @@
+pnpm dlx wrangler d1 execute <db_name> [options are --remote, --local] --file=<path_to_sql_file>
+
+pnpm dlx wrangler d1 migrations apply weaver-db --local
